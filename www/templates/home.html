@@ -1,31 +1,85 @@
 <ion-view view-title="Home">
     <ion-content id="back1">
-    <img src="engro-foods-logo.png">
-    
-    <br/>
-		<br/>
-		
-      
-		<h3 class="text-center" style="color:red">Health Insurance</h3>
- 
-        <br/>
-       
-		<h2 class="text-center" style="color:red">Select Option</h2>
-		
-		 
-	
-        <button class="button button-block button-assertive" ng-show="{{$parent.status}}" ng-click="notify()">
-           Find Near By Hospital
+        <img style="width: 200px"  src="engro-foods-logo.png">
+        <img style="float:right; width: 90px"  src="engro-life-logo.gif">
+        <div class="bar bar-balanced">
+            <h3 class="title">Health Insurance</h3>
+        </div>
+
+        <h2 class="text-center" style="color:green"><pre> </pre></h2>
+
+
+
+        <div class="containerCover" ng-show="{{$parent.status}}" ng-click="notify()">
+            <button class="button button-balanced icon ion-ios-location"></button>
+            <button class="button button-outline button-balanced caption">
+                Nearby Hospital
+            </button>
+        </div>
+        <div class="containerCover" ng-click="profile()">
+            <button class="button button-balanced icon ion-android-person"></button>
+            <button class="button button-outline button-balanced caption">
+                User Profile
+            </button>
+        </div>
+        <div class="containerCover" ng-click="ping()">
+            <button class="button button-balanced icon ion-android-alert"></button>
+            <button class="button button-outline button-balanced caption">
+                Emergency Ping
+            </button>
+        </div>
+        <div class="containerCover" ng-click="contact()">
+            <button class="button button-balanced icon ion-android-call"></button>
+            <button class="button button-outline button-balanced caption">
+                Emergency Contacts
+            </button>
+        </div>
+        <div class="containerCover" ng-click="form()">
+            <button class="button button-balanced icon ion-android-download"></button>
+            <button class="button button-outline button-balanced caption">
+                Download Form
+            </button>
+        </div>
+        <div class="containerCover" ng-click="location()">
+            <button class="button button-balanced icon ion-ios-location-outline"></button>
+            <button class="button button-outline button-balanced caption">
+                Your Location
+            </button>
+        </div>
+        <div class="containerCover" ng-click="civil()">
+            <button class="button button-balanced icon ion-android-list"></button>
+            <button class="button button-outline button-balanced caption">
+                Hospital Lists
+            </button>
+        </div>
+        <div class="containerCover" ng-click="civil()">
+            <button class="button button-balanced icon ion-settings"></button>
+            <button class="button button-outline button-balanced caption">
+                User Settings
+            </button>
+        </div>
+<!--
+        <button class="button button-block button-assertive" >
+            Find Near By Hospital
         </button>
-		 <button class="button button-block button-assertive" ng-click="profile()">
+        <button class="button button-block button-assertive">
             Profile
         </button>
-		 <button class="button button-block button-assertive" ng-click="audi()">
-             Emergency Ping 
+        <button class="button button-block button-assertive">
+            Emergency Ping
         </button>
-		 <button class="button button-block button-assertive" ng-click="civil()">
-           Settings 
+        <button class="button button-block button-assertive">
+            Contact Numbers
         </button>
- 
+        <button class="button button-block button-assertive">
+            Download Form
+        </button>
+        <button class="button button-block button-assertive">
+            Get Current Location
+        </button>
+        <button class="button button-block button-assertive">
+            Settings
+        </button>-->
     </ion-content>
+
 </ion-view>

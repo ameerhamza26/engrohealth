@@ -7,3 +7,21 @@
 .scroll {
   height: 100%;
 }
+
+.caption{
+  display: block;
+  width:20px;
+  font-size:10px;
+  padding:0;
+  line-height:10px;
+  border:none;
+  min-height:30px;
+  
+}
+
+.containerCover{
+  display:inline-block;
+  margin:10px;
+  text-align: center;
+  padding: 10px;
+}
