@@ -44,31 +44,33 @@ angular.module('starter.controllers', [])
       });
     }
   })
-  .controller('HomeCtrl', function ($ionicPlatform, $cordovaInAppBrowser, $ionicLoading, $cordovaGeolocation, $scope, $state, $cordovaLocalNotification, $http, $timeout, $interval, $ionicModal, $ionicPopup, ionicToast) {
+  .controller('HomeCtrl', function ($ionicPlatform, $cordovaInAppBrowser, $ionicLoading, $cordovaGeolocation, $scope, $state, $cordovaLocalNotification, $http, $timeout, $interval, $ionicModal, $ionicPopup, ionicToast, dataService) {
 
     $scope.status = "true";
 
-    var myPopup = $ionicPopup.show({
-      template: '<input type="text" ></input>',
-      title: '<b>Enter Pass Key</b>',
-      subTitle: '',
-      scope: $scope,
-      buttons: [
-        { text: 'Cancel' },
-        {
-          text: '<b>Login</b>',
-          type: 'button button-assertive',
-          onTap: function (e) {
-            $scope.status = "true";
+    //dataService.startDatabase();
 
-          }
-        }
-      ]
-    });
-    myPopup.then(function (res) {
-      console.log('Tapped!', res);
-      $scope.status = "true";
-    });
+    // var myPopup = $ionicPopup.show({
+    //   template: '<input type="text" ></input>',
+    //   title: '<b>Enter Pass Key</b>',
+    //   subTitle: '',
+    //   scope: $scope,
+    //   buttons: [
+    //     { text: 'Cancel' },
+    //     {
+    //       text: '<b>Login</b>',
+    //       type: 'button button-assertive',
+    //       onTap: function (e) {
+    //         $scope.status = "true";
+
+    //       }
+    //     }
+    //   ]
+    // });
+    // myPopup.then(function (res) {
+    //   console.log('Tapped!', res);
+    //   $scope.status = "true";
+    // });
 
 
 
@@ -90,6 +92,11 @@ angular.module('starter.controllers', [])
 
     };
 
+    $scope.hospital = function () {
+      $state.go('hospital');
+
+    };
+
     $scope.form = function () {
 
       var options = {
@@ -107,10 +114,6 @@ angular.module('starter.controllers', [])
         .catch(function (event) {
           alert("Error");
         });
-
-      //$cordovaInAppBrowser.close();
-      //window.open('https://www.dropbox.com/s/l0leid0f4uzahoj/In-Patient%20Claim%20Form.pdf', '_system', 'location=yes')
-
     };
 
     $scope.location = function () {
@@ -141,7 +144,8 @@ angular.module('starter.controllers', [])
 
 
 
-  }).controller('PingCtrl', function ($cordovaSms, $scope, $ionicPopup) {
+  })
+  .controller('PingCtrl', function ($cordovaSms, $scope, $ionicPopup) {
 	
     // $scope.SMSText = "";
     // $cordovaSms
@@ -169,7 +173,59 @@ angular.module('starter.controllers', [])
         });
     }
 
-  }).controller('ContactCtrl', function ($cordovaSms, $scope, $state, $ionicPopup) {
+  })
+  .controller('HospitalCtrl', function ($cordovaSms, $scope, $state, $ionicPopup, dataService, cityService) {
+
+    // $scope.filter = "";
+    // $scope.search = function (item) {
+    //   var keyword = new RegExp($scope.filter, 'i');
+    //   return !$scope.filter || keyword.test(item);
+    // };
+
+    $scope.listdata = [];
+    $scope.listdata = dataService.getCities();
+
+    $scope.selectCity = function (cityName) {
+      cityService.setCityName(cityName);
+      $state.go('hospitalList');
+    }
+    //console.log($scope.listdata);
+    //console.log($scope.listdata);
+
+  })
+  .controller('HospitalListCtrl', function ($cordovaSms, $scope, $state, $ionicPopup, dataService, cityService) {
+
+    $scope.listdata = [];
+    $scope.listdata = dataService.getCityHospitals(cityService.getCityName());
+
+    $scope.showDetails = function (SNo) {
+      for (var index = 0; index < $scope.listdata.length; index++) {
+        if($scope.listdata[index].SNo == SNo){
+          var element = $scope.listdata[index];
+          break;
+          }
+      }
+      
+      $ionicPopup.show({
+        title: element.HospitalName + '<br /><br />' + element.Telephone,
+        subTitle: element.Address + '<br />' + element.City
+        + "(" + element.Extension + ")"
+        + '<br />Latitiude: ' + element.lat
+        + '<br />Longitude: ' + element.lon,
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel' }
+        ]
+      });
+
+    }
+
+    
+    //console.log($scope.listdata);
+    //console.log($scope.listdata);
+
+  })
+  .controller('ContactCtrl', function ($cordovaSms, $scope, $state, $ionicPopup) {
 
     $scope.listdata = [];
     $scope.listdata.push({ "name": "Medical Hotline South (Dr. Salman) 1", "number": "03002018246" });
@@ -182,11 +238,29 @@ angular.module('starter.controllers', [])
     $scope.listdata.push({ "name": "Head of Misc. Dept. (Shaikh Babar)", "number": "0302-8297044" });
 
     $scope.showContact = function (num) {
-      $ionicPopup.alert({
-        title: '<b>' + $scope.listdata[num].name + '<br />' + $scope.listdata[num].number + '</b>'
-      }).then(function (res) {
+      // $ionicPopup.alert({
+      //   title: '<b>' + $scope.listdata[num].name + '<br />' + $scope.listdata[num].number + '</b>'
+      // }).then(function (res) {
 
+      // });
+      
+      $ionicPopup.show({
+        title: $scope.listdata[num].name,
+        subTitle: $scope.listdata[num].number,
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel' },
+          {
+            text: '<b>Call</b>',
+            type: 'button-positive',
+            onTap: function (e) {
+              window.open('tel:' + $scope.listdata[num].number, '_system', 'location=yes')
+              //window.location.href = 'tel:' + $scope.listdata[num].number;
+            }
+          },
+        ]
       });
+
     }
 
   });
