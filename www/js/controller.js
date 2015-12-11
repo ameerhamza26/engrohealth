@@ -18,7 +18,7 @@ angular.module('starter.controllers', [])
 
       var posOptions = {
         enableHighAccuracy: true,
-        timeout: 20000,
+        timeout: 10000,
         maximumAge: 0
       };
       $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
@@ -193,19 +193,19 @@ angular.module('starter.controllers', [])
     //console.log($scope.listdata);
 
   })
-  .controller('HospitalListCtrl', function ($cordovaSms, $scope, $state, $ionicPopup, dataService, cityService) {
+  .controller('HospitalListCtrl', function ($cordovaGeolocation, $cordovaSms, $scope, $state, $ionicPopup, dataService, cityService) {
 
     $scope.listdata = [];
     $scope.listdata = dataService.getCityHospitals(cityService.getCityName());
 
     $scope.showDetails = function (SNo) {
       for (var index = 0; index < $scope.listdata.length; index++) {
-        if($scope.listdata[index].SNo == SNo){
+        if ($scope.listdata[index].SNo == SNo) {
           var element = $scope.listdata[index];
           break;
-          }
+        }
       }
-      
+
       $ionicPopup.show({
         title: element.HospitalName + '<br /><br />' + element.Telephone,
         subTitle: element.Address + '<br />' + element.City
@@ -217,6 +217,9 @@ angular.module('starter.controllers', [])
           { text: 'Cancel' }
         ]
       });
+
+
+
 
     }
 
