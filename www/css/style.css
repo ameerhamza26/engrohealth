@@ -16,12 +16,31 @@
   line-height:10px;
   border:none;
   min-height:30px;
-  
+  margin-left: 10px
+    
 }
 
 .containerCover{
   display:inline-block;
-  margin:10px;
+  margin:15px;
   text-align: center;
   padding: 10px;
 }
+
+.myown{	
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    
+}
+
+.button.button-balanced.button-outline {
+    border-color: #33cd5f;
+    background: transparent;
+    color: #333;
+}
+
+
