@@ -60,6 +60,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 
         url: '/hospitalList',
         templateUrl: 'templates/hospitalList.html',
         controller: 'HospitalListCtrl'
+      }).
+      state('locationMaps', {
+        url: '/locationMaps',
+        templateUrl: 'templates/locationMaps.html',
+        controller: 'locationMapsCtrl'
       });
 
     $urlRouterProvider.otherwise('/home');
