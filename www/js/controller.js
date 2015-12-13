@@ -218,9 +218,6 @@ angular.module('starter.controllers', [])
         ]
       });
 
-
-
-
     }
 
     
