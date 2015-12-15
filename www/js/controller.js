@@ -97,6 +97,10 @@ angular.module('starter.controllers', [])
 
     };
 
+    $scope.locationMaps = function (params) {
+      $state.go('locationMaps');
+    }
+
     $scope.form = function () {
 
       var options = {
@@ -224,6 +228,19 @@ angular.module('starter.controllers', [])
     //console.log($scope.listdata);
     //console.log($scope.listdata);
 
+  })
+  .controller('locationMapsCtrl', function ($scope, NgMap) {
+
+    var vm = this;
+    NgMap.getMap().then(function (map) {
+      vm.showCustomMarker = function (evt) {
+        map.customMarkers.foo.setVisible(true);
+        map.customMarkers.foo.setPosition(this.getPosition());
+      };
+      vm.closeCustomMarker = function (evt) {
+        this.style.display = 'none';
+      };
+    });
   })
   .controller('ContactCtrl', function ($cordovaSms, $scope, $state, $ionicPopup) {
 

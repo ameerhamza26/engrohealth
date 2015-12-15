@@ -1,0 +1,16 @@
+<ng-map zoom="13" center="1600 pennsylvania ave, washington DC" style="height:600px" on-center-changed="centerCustomMarker()">
+	<marker position="10 pennsylvania ave, washington DC" on-click="vm.showCustomMarker()"></marker>
+	<marker position="2600 pennsylvania ave, washington DC" on-click="vm.showCustomMarker()"></marker>
+	<custom-marker id="foo" position="10 pennsylvania ave, washington DC" on-click="vm.closeCustomMarker()">
+		<div>
+			<img width="64" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/President_Barack_Obama%2C_2012_portrait_crop.jpg/140px-President_Barack_Obama%2C_2012_portrait_crop.jpg"
+			align="left" /> Hi, How Are You?
+			<br/> My Name is Obama, and people call me as Mr. President.
+			<br/> We live in this house.
+			<br/>
+			<br/>
+			<img width="300" src="http://cdn.cstatic.net/images/gridfs/53b42fd3f92ea17d970280b4/Screen%20Shot%202014-07-02%20at%2012.07.54%20PM.png"
+			/>
+			<br/> If you want to visit us, please click <a href="https://www.whitehouse.gov">here</a>
+	</custom-marker>
+</ng-map>
