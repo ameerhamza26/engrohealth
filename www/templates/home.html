@@ -10,10 +10,7 @@
 
 
 
-        <div class="containerCover" ng-show="{{$parent.status}}" ng-click="notify()">
-            <button class="myown"><img src="img/hos.png"/></button>
-            <button class="button button-outline button-balanced caption">Nearby Hospital</button>
-        </div>
+        
 
         <div class="containerCover" ng-click="profile()">
             <button class="myown"><img src="img/user.png"/></button>
@@ -46,11 +43,16 @@
             <button class="button button-outline button-balanced caption">Hospital List</button>
         </div>
 
-        <div class="containerCover" ng-click="locationMaps()">
+        <div class="containerCover" ng-show="{{$parent.status}}" ng-click="">
+            <button class="myown"><img src="img/hos.png"/></button>
+            <button class="button button-outline button-balanced caption">Nearby Hospital</button>
+        </div>
+
+        <div class="containerCover" ng-click="">
             <button class="myown"><img src="img/user_settings.png"/></button>
             <button class="button button-outline button-balanced caption">User Settings</button>
         </div>
-<!--
+<!-- notify() locationMaps()
         <button class="button button-block button-assertive" >
             Find Near By Hospital
         </button>
