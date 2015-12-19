@@ -100,7 +100,7 @@ angular.module('starter.controllers', [])
     $scope.locationMaps = function (params) {
       $state.go('locationMaps');
     }
-    
+
     $scope.feedback = function () {
       $state.go('feedback');
     }
@@ -155,59 +155,66 @@ angular.module('starter.controllers', [])
   })
   .controller('feedbackCtrl', function ($scope) {
     $scope.emailText = [];
-    $scope.sendEmail = function() {
-      if(window.plugins && window.plugins.emailComposer) {
-            window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
-                console.log("Response -> " + result);
-            }, 
-            "Feedback For Engro Health Insurance(Phase I)", // Subject
-            $scope.emailText[0],                      // Body
-            ["mtalhajamil93@gmail.com","muhammadtalhajamil@hotmail.com"],    // To
-            null,                    // CC
-            null,                    // BCC
-            false,                   // isHTML
-            null,                    // Attachments
-            null);                   // Attachment Data
-        }
+    $scope.sendEmail = function () {
+      if (window.plugins && window.plugins.emailComposer) {
+        window.plugins.emailComposer.showEmailComposerWithCallback(function (result) {
+          alert(result);
+        },
+          "Feedback From " + $scope.emailText[0].name + " For Engro Health Insurance(Phase I) ", // Subject
+          $scope.emailText[0].body,                      // Body
+          ["mtalhajamil93@gmail.com", "ameerhamza810@gmail.com", "s.wasiq.muhammad@gmail.com"],    // To
+          null,                    // CC
+          null,                    // BCC
+          false,                   // isHTML
+          null,                    // Attachments
+          null);                   // Attachment Data
+      }
     }
 
   })
   .controller('PingCtrl', function ($cordovaSms, $scope, $ionicPopup) {
-	
-    // $scope.SMSText = "";
-    // $cordovaSms
-    //     .send('03126995968', 'SMS content', 'options')
-    //     .then(function() {
-    //       alert('SMS was sent');
-    //     }, function(error) {
-    //       alert('SMS sending failed');
-    //     });
-  
     $scope.listdata = [];
-     
-    //$scope.listdata.push({ "SMS" : "empty" });
+    $scope.contacts = [];
+    // $scope.listdata[0].msg = "Not Defined by sender";
+    // $scope.listdata[0].name = "Not Defined by sender";
+    // $scope.listdata[0].location = "Not Defined by sender";
+    // $scope.listdata[0].pno = "Not Defined by sender" ;
+    $scope.contacts.push({ "name": "Talha", "number": "03126995968" });
+    $scope.contacts.push({ "name": "Hamza", "number": "03126995968" });
+
     $scope.sendSMS = function () {
-      $cordovaSms
-        .send('03028285155', $scope.listdata[0], 'options')
-        .then(function () {
-          $ionicPopup.alert({
-            title: 'SMS Sent!!'
-          }).then(function (res) {
+      var failed = 0;
+      var sent = 0;
+      var SMS = "Dear Insurance Members:\n\nEmergency MSG:" + $scope.listdata[0].msg + "\n\nName:"
+        + $scope.listdata[0].name + "\n\nPNo:" + $scope.listdata[0].pno + "\n\nLocation:" + $scope.listdata[0].location;
+      for (var index = 0; index < $scope.contacts.length; index++) {
+        $cordovaSms
+          .send($scope.contacts[index].number, SMS, 'options')
+          .then(function () {
+            sent++
 
+            if (sent == $scope.contacts.length) {
+                $ionicPopup.alert({
+                  title: 'SMS sent'
+                });
+            }
+
+          }, function (error) {
+            failed++;
+            if (failed == $scope.contacts.length) {
+                $ionicPopup.alert({
+                  title: 'SMS Sending Failed. Make sure you have sufficient balance'
+                });
+            }
           });
-        }, function (error) {
-          alert('SMS sending failed');
-        });
-    }
 
+
+      }
+
+
+    }
   })
   .controller('HospitalCtrl', function ($cordovaSms, $scope, $state, $ionicPopup, dataService, cityService) {
-
-    // $scope.filter = "";
-    // $scope.search = function (item) {
-    //   var keyword = new RegExp($scope.filter, 'i');
-    //   return !$scope.filter || keyword.test(item);
-    // };
 
     $scope.listdata = [];
     $scope.listdata = dataService.getCities();
@@ -216,8 +223,6 @@ angular.module('starter.controllers', [])
       cityService.setCityName(cityName);
       $state.go('hospitalList');
     }
-    //console.log($scope.listdata);
-    //console.log($scope.listdata);
 
   })
   .controller('HospitalListCtrl', function ($cordovaGeolocation, $cordovaSms, $scope, $state, $ionicPopup, dataService, cityService) {

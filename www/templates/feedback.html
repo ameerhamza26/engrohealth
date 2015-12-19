@@ -6,8 +6,12 @@
         <br /><br /><br />
         <div>
             <label class="item item-input">
-                <textarea type="text" rows="5" ng-model="emailText[0]" placeholder="Enter your feedback"></textarea>
+                <textarea type="text" ng-model="emailText[0].name" placeholder="Your Name"></textarea>
             </label>
+            <label class="item item-input">
+                <textarea type="text" rows="5" ng-model="emailText[0].body" placeholder="Enter your feedback"></textarea>
+            </label>
+            
             <button class="button button-block button-balanced" ng-click="sendEmail()">Send Email</button>
         </div>
 

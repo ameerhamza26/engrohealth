@@ -6,8 +6,24 @@
         <br /><br /><br />
         <div>
             <label class="item item-input">
-                <textarea type="text" ng-model="listdata[0]" placeholder="Type SMS to send All"></textarea>
+                <textarea type="text" ng-model="listdata[0].name" placeholder="Name"></textarea>
             </label>
+            <label class="item item-input">
+                <textarea type="text" ng-model="listdata[0].pno" placeholder="PNo"></textarea>
+            </label>
+            <label class="item item-input">
+                <textarea type="text" ng-model="listdata[0].location" placeholder="Your Location"></textarea>
+            </label>
+            <label class="item item-input">
+                <textarea type="text" ng-model="listdata[0].msg" placeholder="Your Emergency Message"></textarea>
+            </label>
+            <label class="item item-input">
+                 Your SMS will be sent to:
+            </label>
+           
+            <ion-item ng-repeat="item in contacts">
+                 {{item.name}}
+            </ion-item>
             <button class="button button-block button-balanced" ng-click="sendSMS()">Send SMS</button>
         </div>
 
