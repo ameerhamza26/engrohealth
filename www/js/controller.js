@@ -72,15 +72,33 @@ angular.module('starter.controllers', [])
     //   $scope.status = "true";
     // });
 
-
+    function future(){
+      $ionicPopup.alert({
+        title: 'Functionality to be implemented soon'
+      });
+    }
 
     $scope.notify = function () {
-      $state.go('map');
+      future();
+      //$state.go('map');
+    };
+    
+    $scope.profile = function () {
+      future();
+      //$state.go('profile');
 
     };
-    $scope.profile = function () {
-      $state.go('profile');
-
+    
+    $scope.nearByHospital = function () {
+      future();
+    };
+    
+    $scope.insurancePolicy = function () {
+      future();
+    };
+    
+    $scope.settings = function () {
+      future();
     };
 
     $scope.contact = function () {
@@ -94,11 +112,11 @@ angular.module('starter.controllers', [])
 
     $scope.hospital = function () {
       $state.go('hospital');
-
     };
 
     $scope.locationMaps = function (params) {
-      $state.go('locationMaps');
+      future();
+      //$state.go('locationMaps');
     }
 
     $scope.feedback = function () {
@@ -136,7 +154,7 @@ angular.module('starter.controllers', [])
           var long = position.coords.longitude;
           $ionicLoading.hide();
           $ionicPopup.alert({
-            title: "longitute:" + long + "  latitute:" + lat
+            title: "longitute:" + long + "  latitute:" + lat + "<br />Maps to be implemented soon"
           }).then(function (res) {
 
           });
@@ -170,7 +188,6 @@ angular.module('starter.controllers', [])
           null);                   // Attachment Data
       }
     }
-
   })
   .controller('PingCtrl', function ($cordovaSms, $scope, $ionicPopup) {
     $scope.listdata = [];
@@ -194,17 +211,17 @@ angular.module('starter.controllers', [])
             sent++
 
             if (sent == $scope.contacts.length) {
-                $ionicPopup.alert({
-                  title: 'SMS sent'
-                });
+              $ionicPopup.alert({
+                title: 'SMS sent'
+              });
             }
 
           }, function (error) {
             failed++;
             if (failed == $scope.contacts.length) {
-                $ionicPopup.alert({
-                  title: 'SMS Sending Failed. Make sure you have sufficient balance'
-                });
+              $ionicPopup.alert({
+                title: 'SMS Sending Failed. Make sure you have sufficient balance'
+              });
             }
           });
 
