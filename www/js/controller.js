@@ -100,6 +100,10 @@ angular.module('starter.controllers', [])
     $scope.locationMaps = function (params) {
       $state.go('locationMaps');
     }
+    
+    $scope.feedback = function () {
+      $state.go('feedback');
+    }
 
     $scope.form = function () {
 
@@ -147,6 +151,25 @@ angular.module('starter.controllers', [])
   .controller('profileCtrl', function ($ionicPlatform, $cordovaSms, $ionicModal, $ionicPopup, $scope, $state, $cordovaLocalNotification, $http, $timeout, $interval, ionicToast) {
 
 
+
+  })
+  .controller('feedbackCtrl', function ($scope) {
+    $scope.emailText = [];
+    $scope.sendEmail = function() {
+      if(window.plugins && window.plugins.emailComposer) {
+            window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
+                console.log("Response -> " + result);
+            }, 
+            "Feedback For Engro Health Insurance(Phase I)", // Subject
+            $scope.emailText[0],                      // Body
+            ["mtalhajamil93@gmail.com","muhammadtalhajamil@hotmail.com"],    // To
+            null,                    // CC
+            null,                    // BCC
+            false,                   // isHTML
+            null,                    // Attachments
+            null);                   // Attachment Data
+        }
+    }
 
   })
   .controller('PingCtrl', function ($cordovaSms, $scope, $ionicPopup) {

@@ -65,6 +65,11 @@ angular.module('starter', ['ionic','ngMap','starter.controllers', 'starter.servi
         url: '/locationMaps',
         templateUrl: 'templates/locationMaps.html',
         controller: 'locationMapsCtrl'
+      }).
+      state('feedback', {
+        url: '/feedback',
+        templateUrl: 'templates/feedback.html',
+        controller: 'feedbackCtrl'
       });
 
     $urlRouterProvider.otherwise('/home');
