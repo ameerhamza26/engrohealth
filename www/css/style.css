@@ -1,6 +1,6 @@
 /* Empty. Add your own CSS if you like */
  .scroll-content {
-      background: url('../img/bg.png');
+      background: url('../img/bg2.png');
       overflow: scroll;
   }
 
@@ -56,3 +56,7 @@ body{
   height: 100%; 
 }
 
+#hg{
+  background-image: url('../img/hg.png');
+
+}
