@@ -44,37 +44,14 @@ angular.module('starter.controllers', [])
       });
     }
   })
-  .controller('HomeCtrl', function ($ionicPlatform, $cordovaInAppBrowser, $ionicLoading, $cordovaGeolocation, $scope, $state, $cordovaLocalNotification, $http, $timeout, $interval, $ionicModal, $ionicPopup, ionicToast, dataService) {
+  .controller('HomeCtrl', function ($ionicPlatform, $cordovaInAppBrowser, $ionicLoading,  $scope, $state, $cordovaLocalNotification, $http, $timeout, $interval, $ionicModal, $ionicPopup, ionicToast, dataService) {
 
+    //$cordovaGeolocation,
     $scope.status = "true";
 
-    //dataService.startDatabase();
-
-    // var myPopup = $ionicPopup.show({
-    //   template: '<input type="text" ></input>',
-    //   title: '<b>Enter Pass Key</b>',
-    //   subTitle: '',
-    //   scope: $scope,
-    //   buttons: [
-    //     { text: 'Cancel' },
-    //     {
-    //       text: '<b>Login</b>',
-    //       type: 'button button-assertive',
-    //       onTap: function (e) {
-    //         $scope.status = "true";
-
-    //       }
-    //     }
-    //   ]
-    // });
-    // myPopup.then(function (res) {
-    //   console.log('Tapped!', res);
-    //   $scope.status = "true";
-    // });
-
-    function future(){
+    function future() {
       $ionicPopup.alert({
-        title: 'Functionality to be implemented soon'
+        title: 'Functionality to be implemented in the next Phase'
       });
     }
 
@@ -82,21 +59,21 @@ angular.module('starter.controllers', [])
       future();
       //$state.go('map');
     };
-    
+
     $scope.profile = function () {
       future();
       //$state.go('profile');
 
     };
-    
+
     $scope.nearByHospital = function () {
       future();
     };
-    
+
     $scope.insurancePolicy = function () {
       future();
     };
-    
+
     $scope.settings = function () {
       future();
     };
@@ -123,6 +100,14 @@ angular.module('starter.controllers', [])
       $state.go('feedback');
     }
 
+    $scope.insurance_amount = function () {
+      future();
+    }
+
+    $scope.insurance_category = function () {
+      future();
+    }
+
     $scope.form = function () {
 
       var options = {
@@ -142,28 +127,28 @@ angular.module('starter.controllers', [])
         });
     };
 
-    $scope.location = function () {
-      $ionicLoading.show({
-        template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Acquiring location!'
-      });
-      var posOptions = { timeout: 10000, enableHighAccuracy: false };
-      $cordovaGeolocation
-        .getCurrentPosition(posOptions)
-        .then(function (position) {
-          var lat = position.coords.latitude;
-          var long = position.coords.longitude;
-          $ionicLoading.hide();
-          $ionicPopup.alert({
-            title: "longitute:" + long + "  latitute:" + lat + "<br />Maps to be implemented soon"
-          }).then(function (res) {
+    // $scope.location = function () {
+    //   $ionicLoading.show({
+    //     template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Acquiring location!'
+    //   });
+    //   var posOptions = { timeout: 10000, enableHighAccuracy: false };
+    //   $cordovaGeolocation
+    //     .getCurrentPosition(posOptions)
+    //     .then(function (position) {
+    //       var lat = position.coords.latitude;
+    //       var long = position.coords.longitude;
+    //       $ionicLoading.hide();
+    //       $ionicPopup.alert({
+    //         title: "longitute:" + long + "  latitute:" + lat + "<br />Maps to be implemented soon"
+    //       }).then(function (res) {
 
-          });
-        }, function (err) {
-          $ionicLoading.hide();
-          alert("Cannot get location due to: " + err)
-        });
+    //       });
+    //     }, function (err) {
+    //       $ionicLoading.hide();
+    //       alert("Cannot get location. Please check your internet connectivity")
+    //     });
 
-    };
+    // };
 
   })
   .controller('profileCtrl', function ($ionicPlatform, $cordovaSms, $ionicModal, $ionicPopup, $scope, $state, $cordovaLocalNotification, $http, $timeout, $interval, ionicToast) {
@@ -180,7 +165,7 @@ angular.module('starter.controllers', [])
         },
           "Feedback From " + $scope.emailText[0].name + " For Engro Health Insurance(Phase I) ", // Subject
           $scope.emailText[0].body,                      // Body
-          ["mtalhajamil93@gmail.com", "ameerhamza810@gmail.com", "s.wasiq.muhammad@gmail.com"],    // To
+          ["wkhawar@engrofoods.com", "mtalhajamil93@gmail.com", "ameerhamza810@gmail.com", "s.wasiq.muhammad@gmail.com"],    // To
           null,                    // CC
           null,                    // BCC
           false,                   // isHTML
@@ -196,10 +181,29 @@ angular.module('starter.controllers', [])
     // $scope.listdata[0].name = "Not Defined by sender";
     // $scope.listdata[0].location = "Not Defined by sender";
     // $scope.listdata[0].pno = "Not Defined by sender" ;
-    $scope.contacts.push({ "name": "Talha", "number": "03126995968" });
-    $scope.contacts.push({ "name": "Hamza", "number": "03126995968" });
+    $scope.contacts.push({ "name": "Waleed Khawar", "number": "03028285155" });
+    $scope.contacts.push({ "name": "Muhammad Talha", "number": "03126995968" });
+    $scope.contacts.push({ "name": "Noor", "number": "0323297461" });
+    $scope.contacts.push({ "name": "Ameer Hamza", "number": "03462651725" });
 
     $scope.sendSMS = function () {
+        $ionicPopup.show({
+        title: "Are you sure you want to send this SMS?",
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel' },
+          {
+            text: '<b>Send</b>',
+            type: 'button-positive',
+            onTap: function (e) {
+              send();
+            }
+          },
+        ]
+      });
+    }
+
+    function send() {
       var failed = 0;
       var sent = 0;
       var SMS = "Dear Insurance Members:\n\nEmergency MSG:" + $scope.listdata[0].msg + "\n\nName:"
@@ -224,12 +228,9 @@ angular.module('starter.controllers', [])
               });
             }
           });
-
-
       }
-
-
     }
+
   })
   .controller('HospitalCtrl', function ($cordovaSms, $scope, $state, $ionicPopup, dataService, cityService) {
 
@@ -269,24 +270,20 @@ angular.module('starter.controllers', [])
 
     }
 
-    
-    //console.log($scope.listdata);
-    //console.log($scope.listdata);
-
   })
-  .controller('locationMapsCtrl', function ($scope, NgMap) {
+  // .controller('locationMapsCtrl', function ($scope, NgMap) {
 
-    var vm = this;
-    NgMap.getMap().then(function (map) {
-      vm.showCustomMarker = function (evt) {
-        map.customMarkers.foo.setVisible(true);
-        map.customMarkers.foo.setPosition(this.getPosition());
-      };
-      vm.closeCustomMarker = function (evt) {
-        this.style.display = 'none';
-      };
-    });
-  })
+  //   var vm = this;
+  //   NgMap.getMap().then(function (map) {
+  //     vm.showCustomMarker = function (evt) {
+  //       map.customMarkers.foo.setVisible(true);
+  //       map.customMarkers.foo.setPosition(this.getPosition());
+  //     };
+  //     vm.closeCustomMarker = function (evt) {
+  //       this.style.display = 'none';
+  //     };
+  //   });
+  // })
   .controller('ContactCtrl', function ($cordovaSms, $scope, $state, $ionicPopup) {
 
     $scope.listdata = [];
@@ -298,13 +295,9 @@ angular.module('starter.controllers', [])
     $scope.listdata.push({ "name": "Manager Relationship (Mohsin Murtaza Hussain)", "number": "03028228254" });
     $scope.listdata.push({ "name": "Officer Relationship (Zafar Ahmed)", "number": "03400004468" });
     $scope.listdata.push({ "name": "Head of Misc. Dept. (Shaikh Babar)", "number": "0302-8297044" });
+    $scope.listdata.push({ "name": "Waleed Khawar", "number": "03028285155" });
 
     $scope.showContact = function (num) {
-      // $ionicPopup.alert({
-      //   title: '<b>' + $scope.listdata[num].name + '<br />' + $scope.listdata[num].number + '</b>'
-      // }).then(function (res) {
-
-      // });
       
       $ionicPopup.show({
         title: $scope.listdata[num].name,

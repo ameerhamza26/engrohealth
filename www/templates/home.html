@@ -2,17 +2,18 @@
     <ion-content id="back1">
         <img style="width: 200px"  src="engro-foods-logo.png">
         <img style="float:right; width: 90px"  src="engro-life-logo.gif">
-        <div class="bar bar-balanced">
+        <!--<div class="bar bar-balanced">
             <h3 class="title" id="hg"></h3>
+        </div>-->
+        
+        <div class="bar bar-balanced">
+            <h3 class="title">Engro Health</h3>
         </div>
-
+        
         <h2 class="text-center" style="color:green"><pre> </pre></h2>
 
 
-
-
-
-        <div class="containerCover" ng-click="profile()">
+        <div class="containerCover" ng-click="profile()" hidden>
             <button class="myown"><img src="img/user.png"/></button>
             <button class="button button-outline button-balanced caption">User Profile</button>
         </div>
@@ -33,7 +34,7 @@
         </div>
 
         </div>
-        <div class="containerCover" ng-click="location()">
+        <div class="containerCover" ng-click="location()" hidden>
             <button class="myown"><img src="img/location.png"/></button>
             <button class="button button-outline button-balanced caption">Your Location</button>
         </div>
@@ -43,7 +44,7 @@
             <button class="button button-outline button-balanced caption">Hospital List</button>
         </div>
 
-        <div class="containerCover" ng-show="{{$parent.status}}" ng-click="nearByHospital()">
+        <div class="containerCover" ng-show="{{$parent.status}}" ng-click="nearByHospital()" hidden>
             <button class="myown"><img src="img/hos.png"/></button>
             <button class="button button-outline button-balanced caption">Nearby Hospital</button>
         </div>
@@ -69,38 +70,10 @@
             <button class="button button-outline button-balanced caption">Insurance Category</button>
         </div>
         
-        <div class="containerCover" ng-click="settings()">
+        <div class="containerCover" ng-click="settings()" hidden>
             <button class="myown"><img src="img/user_settings.png"/></button>
             <button class="button button-outline button-balanced caption">User Settings</button>
         </div>
-
-
-<!--
-
-=======
-<!-- notify() locationMaps()
->>>>>>> 2472c1b0deb49f338b564adef6310431ade0a765
-        <button class="button button-block button-assertive" >
-            Find Near By Hospital
-        </button>
-        <button class="button button-block button-assertive">
-            Profile
-        </button>
-        <button class="button button-block button-assertive">
-            Emergency Ping
-        </button>
-        <button class="button button-block button-assertive">
-            Contact Numbers
-        </button>
-        <button class="button button-block button-assertive">
-            Download Form
-        </button>
-        <button class="button button-block button-assertive">
-            Get Current Location
-        </button>
-        <button class="button button-block button-assertive">
-            Settings
-        </button>-->
     </ion-content>
 
 </ion-view>
