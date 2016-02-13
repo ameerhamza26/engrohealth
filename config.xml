@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.maps513257" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>Engro Health Insurance</name>
+<widget id="com.logicsbay.engsure" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>Engsure</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Mobile app to facilitate engro users.
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
+  <author email="mtalhajamil93@gmail.com" href="http://ionicframework.com/">
       Ionic Framework Team
     </author>
   <content src="index.html"/>
@@ -36,4 +36,5 @@
   <plugin name="com.cordova.plugins.sms" spec="~0.1.6"/>
   <plugin name="cordova-plugin-geolocation" spec="~1.0.1"/>
   <plugin name="cordova-plugin-indexedDB" spec="~0.1.2"/>
+  <plugin name="cordova-plugin-file-opener2" spec="https://github.com/pwlin/cordova-plugin-file-opener2.git"/>
 </widget>
