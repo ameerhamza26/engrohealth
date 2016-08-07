@@ -313,7 +313,7 @@ angular.module('starter.controllers', [])
                         text: '<b>Call</b>',
                         type: 'button-positive',
                         onTap: function (e) {
-                            var numbersToCall = element.Telephone;
+                            var numbersToCall = element.Telephone.replace(" ",'');;
                             var indices = [];
                             var numbers = [];
                             var startingIndex = 0;
@@ -327,8 +327,9 @@ angular.module('starter.controllers', [])
                                 startingIndex = indices[i] + 1;
                             }
                             console.log(indices);
+                            console.log(numbersToCall);
                             for(var i=0; i<numbers.length;i++) {
-                                numbers[i] = numbers[i].replace(" ",'');
+                                //numbers[i] = numbers[i].replace(" ",'');
                                 console.log(numbers);
                                 if(numbers[i][0] != "0"){
                                     
