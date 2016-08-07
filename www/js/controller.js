@@ -287,7 +287,7 @@ angular.module('starter.controllers', [])
         }
 
     })
-    .controller('HospitalListCtrl', function ($cordovaGeolocation, $cordovaSms, $scope, $state, $ionicPopup, dataService, cityService) {
+    .controller('HospitalListCtrl', function ($ionicModal,$cordovaGeolocation, $cordovaSms, $scope, $state, $ionicPopup, dataService, cityService) {
 
         $scope.listdata = [];
         $scope.listdata = dataService.getCityHospitals(cityService.getCityName());
@@ -308,11 +308,51 @@ angular.module('starter.controllers', [])
                 + '<br />Longitude: ' + element.lon,
                 scope: $scope,
                 buttons: [
-                    { text: 'Cancel' }
+                    { text: 'Cancel' },
+                    {
+                        text: '<b>Call</b>',
+                        type: 'button-positive',
+                        onTap: function (e) {
+                            var numbersToCall = element.Telephone;
+                            var indices = [];
+                            var numbers = [];
+                            var startingIndex = 0;
+                            for(var i=0; i<numbersToCall.length;i++) {
+                                if (numbersToCall[i] === "/") indices.push(i);
+                            }
+                            indices.push(numbersToCall.length);
+                            
+                            for(var i=0; i<indices.length;i++) {
+                                numbers.push(numbersToCall.substr(startingIndex,indices[i]));
+                                startingIndex = indices[i] + 1;
+                            }
+                            console.log(indices);
+                            for(var i=0; i<numbers.length;i++) {
+                                numbers[i] = numbers[i].replace(" ",'');
+                                console.log(numbers);
+                                if(numbers[i][0] != "0"){
+                                    
+                                    var indexOfDash = numbers[i].indexOf("-");
+                                    if(indexOfDash != -1){
+                                        numbers[i] = numbers[i].substr(0,indexOfDash);
+                                    }
+                                    
+                                    numbers[i] = element.Extension + numbers[i];
+                                    
+                                }
+                                numbers[i] = numbers[i].substring(1);
+                                numbers[i] = numbers[i].replace(/\D/g,'');
+                                numbers[i] = "0092" + numbers[i];
+                            }
+                            console.log(numbers);
+                        }
+                    }
                 ]
             });
 
         }
+        
+       
 
     })
     .controller('benefitsCtrl', function ($cordovaSms, $scope, $state, $ionicPopup, dataService,benefitsService) {
