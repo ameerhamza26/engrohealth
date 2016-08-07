@@ -1,15 +1,15 @@
 <ion-view view-title="BenefitsSubList">
-    <ion-content id="BenefitsSubList">
-        <div class="bar bar-header bar-balanced">
-            <h1 class="title">Insurance Benefits</h1>
+    <div class="bar bar-header bar-balanced">
+        <div class="buttons">
+            <button class="button button-clear ion-ios-arrow-back" ng-click="$ionicGoBack()"></button>
         </div>
+        <h1 class="title">Insurance</h1>
+    </div>
+    <ion-content id="BenefitsSubList" class="has-header" padding="true">
         <ion-list class="item-text-wrap">
-            <div class="item item-divider">
-                Insurance Benefits
-            </div>
             <div>
             <ion-item ng-repeat="item in listData" ng-click="">
-                <div>{{item.Title}}</div><div class="badge badge-assertive">{{item.Info}}</div>
+                <div>{{item.Title}}</div><div class="badge badge-assertive" style="    right: 0px; position: relative;margin-bottom: 10px;"><p style="color: white; margin-left: auto; margin-right: auto;">{{item.Info}}</p></div>
             </ion-item>
         </ion-list>
     </ion-content>

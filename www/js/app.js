@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic','starter.controllers', 'starter.services' , 'ngCordova', 'angularNumberPicker', 'ionic-toast'])
+angular.module('starter', ['ionic','starter.controllers', 'starter.services' , 'ionic.ui.modalService', 'LocalStorageModule', 'ngCordova', 'angularNumberPicker', 'ionic-toast'])
   //,'ngMap'
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -84,6 +84,12 @@ angular.module('starter', ['ionic','starter.controllers', 'starter.services' , '
         url: '/benefitsSubList',
         templateUrl: 'templates/benefitsSubList.html',
         controller: 'benefitsSubListCtrl'
+      }).
+
+      state('register', {
+        url: '/register',
+        templateUrl: 'templates/register.html',
+        controller: 'RegisterCtrl'        
       });
 
     $urlRouterProvider.otherwise('/home');
@@ -92,3 +98,13 @@ angular.module('starter', ['ionic','starter.controllers', 'starter.services' , '
 
 
   });
+
+
+function isEmpty(object) {
+    for (var key in object) {
+        if (object.hasOwnProperty(key)) {
+            return false;
+        }
+    }
+    return true;
+}

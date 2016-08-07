@@ -1,9 +1,14 @@
 <ion-view view-title="Profile">
-    <ion-content id="Profile">
-        <div class="bar bar-header bar-balanced">
-            <h1 class="title">SMS To Selected Numbers</h1>
+    <div class="bar bar-header bar-balanced">
+        <div class="buttons">
+            <button class="button button-clear ion-ios-arrow-back" ng-click="$ionicGoBack()"></button>
         </div>
-        <br /><br /><br />
+        <h1 class="title">SMS To Selected Numbers</h1>
+    </div>
+    <ion-content id="Profile" padding="true">
+        <br />
+        <br />
+        <br />
         <div>
             <label class="item item-input">
                 <textarea type="text" ng-model="listdata[0].name" placeholder="Name"></textarea>
@@ -17,18 +22,13 @@
             <label class="item item-input">
                 <textarea type="text" ng-model="listdata[0].msg" placeholder="Your Emergency Message"></textarea>
             </label>
-            <label class="item item-input">
-                 Your SMS will be sent to:
-            </label>
-           
+            <div style="margin-top:10px;">
+                Your SMS will be sent to:
+            </div>
             <ion-item ng-repeat="item in contacts">
-                 {{item.name}}
+                {{item.name}}
             </ion-item>
             <button class="button button-block button-balanced" ng-click="sendSMS()">Send SMS</button>
         </div>
-
-
-
-
     </ion-content>
 </ion-view>
