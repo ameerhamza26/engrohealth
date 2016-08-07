@@ -239,15 +239,15 @@ angular.module('starter.controllers', [])
         }
     })
     .controller('PingCtrl', function($cordovaSms, $scope, $ionicPopup, localStorageService) {
-        $scope.user= localStorageService.get("loggedUser")
+        $scope.user = localStorageService.get("loggedUser")
         console.log($scope.user)
         $scope.listdata = [];
         $scope.listdata[0] = {
-            name : $scope.user.name,
-            pno : $scope.user.po_no,
+            name: $scope.user.name,
+            pno: $scope.user.po_no,
             msg: $scope.user.message
         }
-        
+
         $scope.contacts = [];
         // $scope.listdata[0].msg = "Not Defined by sender";
         // $scope.listdata[0].name = "Not Defined by sender";
@@ -324,7 +324,7 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('HospitalListCtrl', function($ionicModal, $cordovaGeolocation, appModalService, $cordovaSms, $scope, $state, $ionicPopup, dataService, cityService) {
+.controller('HospitalListCtrl', function($ionicModal, $cordovaGeolocation, appModalService, $cordovaSms, $scope, $state, $ionicPopup, dataService, cityService, $rootScope) {
 
     $scope.listdata = [];
     $scope.listdata = dataService.getCityHospitals(cityService.getCityName());
@@ -346,7 +346,7 @@ angular.module('starter.controllers', [])
                     text: '<b>Call</b>',
                     type: 'button-positive',
                     onTap: function(e) {
-                        var numbersToCall = element.Telephone.replace(" ",'');
+                        var numbersToCall = element.Telephone.replace(" ", '');
                         var indices = [];
                         var numbers = [];
                         var startingIndex = 0;
@@ -378,12 +378,20 @@ angular.module('starter.controllers', [])
                             numbers[i] = "0092" + numbers[i];
                         }
                         console.log(numbers);
-                        appModalService.show('templates/hospital-call-modal.html', 'HospitalModalCtrl as vm', {}).then(function(res) {
-                            console.log(res)
-                            if (res != null) {
+                        $rootScope.numberToDial = numbers;
 
-                            }
-                        })
+                        if (numbers.length <= 1) {
+                            window.open('tel:' + numbers[0], '_system', 'location=yes')
+                        } else {
+
+                            appModalService.show('templates/hospital-call-modal.html', 'HospitalModalCtrl as vm', { num: numbers }).then(function(res) {
+                                console.log(res)
+                                if (res != null) {
+
+                                }
+                            })
+                        }
+
                     }
                 }
             ]
@@ -395,8 +403,17 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('HospitalModalCtrl', function($scope) {
+.controller('HospitalModalCtrl', function($scope, $rootScope) {
 
+    console.log($rootScope.numberToDial)
+    $scope.numbers = $rootScope.numberToDial;
+    $scope.dial = function(index) {
+        window.open('tel:' + $scope.numbers[index], '_system', 'location=yes')
+    }
+
+    $scope.cancel = function() {
+        $scope.closeModal(null);
+    };
 })
 
 .controller('benefitsCtrl', function($cordovaSms, $scope, $state, $ionicPopup, dataService, benefitsService) {

@@ -1,13 +1,16 @@
 <ion-view view-title="HospitalList">
     <div class="bar bar-header bar-balanced">
+        <div class="buttons">
+            <button class="button button-clear ion-close" ng-click="cancel()"></button>
+        </div>
         <h1 class="title">Call Numbers</h1>
     </div>
-    <ion-content>
-        <ion-item ng-repeat="x in [1,2,3]" ng-click="">
+    <ion-content class="has-header" padding="true">
+        <div class="item item-divider">
+            Click on Number to Dial!
+        </div>
+        <ion-item ng-repeat="x in numbers" ng-click="dial($index)">
             <div>{{x}}</div>
-            <div class="badge badge-assertive" style="    right: 0px; position: relative;margin-bottom: 10px;">
-                <p style="color: white; margin-left: auto; margin-right: auto;">{{item.Info}}</p>
-            </div>
         </ion-item>
     </ion-content>
 </ion-view>
