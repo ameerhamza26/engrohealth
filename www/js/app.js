@@ -69,6 +69,21 @@ angular.module('starter', ['ionic','starter.controllers', 'starter.services' , '
         url: '/feedback',
         templateUrl: 'templates/feedback.html',
         controller: 'feedbackCtrl'
+      }).
+      state('benefits', {
+        url: '/benefits',
+        templateUrl: 'templates/benefitsGrades.html',
+        controller: 'benefitsCtrl'
+      }).
+      state('benefitsTopList', {
+        url: '/benefitsTopList',
+        templateUrl: 'templates/benefitsTopList.html',
+        controller: 'benefitsTopListCtrl'
+      }).
+      state('benefitsSubList', {
+        url: '/benefitsSubList',
+        templateUrl: 'templates/benefitsSubList.html',
+        controller: 'benefitsSubListCtrl'
       });
 
     $urlRouterProvider.otherwise('/home');

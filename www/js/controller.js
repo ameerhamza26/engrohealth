@@ -99,9 +99,9 @@ angular.module('starter.controllers', [])
         $scope.feedback = function () {
             $state.go('feedback');
         }
-
-        $scope.insurance_amount = function () {
-            future();
+        
+        $scope.insurance_benefits = function () {
+            $state.go('benefits');
         }
 
         $scope.insurance_category = function () {
@@ -314,6 +314,61 @@ angular.module('starter.controllers', [])
 
         }
 
+    })
+    .controller('benefitsCtrl', function ($cordovaSms, $scope, $state, $ionicPopup, dataService,benefitsService) {
+
+        $scope.listData = ["Category A","Category B","Category C"];
+
+        $scope.selectGrade = function (index) {
+            benefitsService.setGrade(index);
+            $state.go('benefitsTopList');
+        }
+
+    })
+    .controller('benefitsTopListCtrl', function ($location,$cordovaSms, $scope, $state, $ionicPopup, dataService,benefitsService) {
+
+        $scope.listDataOptional = [];
+        $scope.listDataOptional = dataService.getBenefitsTopLayer("optional");
+        
+        $scope.listDataUnOptional = [];
+        $scope.listDataUnOptional = dataService.getBenefitsTopLayer("unoptional");
+
+        $scope.showSubList = function (title) {
+            benefitsService.setTitle(title);
+            console.log($state);
+            //$state.go('benefitsSubList');
+            $location.url('benefitsSubList') 
+        }
+
+    })
+    .controller('benefitsSubListCtrl', function ($cordovaSms, $scope, $state, $ionicPopup, dataService,benefitsService) {
+        console.log("Reached here");
+        console.log($state);
+        $scope.listData = [];
+        var tempList = dataService.getBenefitsSubList(benefitsService.getTitle());
+        console.log(tempList);
+        console.log(benefitsService.getGrade());
+        var grade = benefitsService.getGrade();
+        for(var index = 0 ; index < tempList.length; index++){
+            if("GradeAll" in tempList[index]){
+                $scope.listData.push({"Title":tempList[index].Title, "Info":tempList[index].GradeAll})
+            }
+            else{
+                switch(grade){
+                   case 0:
+                        $scope.listData.push({"Title":tempList[index].Title, "Info":tempList[index].GradeA})
+                        break;
+                   case 1:
+                        $scope.listData.push({"Title":tempList[index].Title, "Info":tempList[index].GradeB})
+                        break;
+                   case 2:
+                        $scope.listData.push({"Title":tempList[index].Title, "Info":tempList[index].GradeC})
+                        break; 
+                }
+                
+            }
+        }
+       benefitsService.setTitle("");
     })
 // .controller('locationMapsCtrl', function ($scope, NgMap) {
 

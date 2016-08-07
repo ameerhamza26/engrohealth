@@ -1,0 +1,21 @@
+<ion-view view-title="Benefits">
+    <ion-content id="Benefits">
+        <div class="bar bar-header bar-balanced">
+            <h1 class="title">Insurance Benefits</h1>
+        </div>
+        <ion-list class="item-text-wrap">
+            <div class="item item-divider">
+                Insurance Benefits
+            </div>
+            <ion-item ng-repeat="item in listDataUnOptional" ng-click="showSubList(item.Title)">
+                {{item.Title}}
+            </ion-item>
+            <div class="item item-divider">
+                Optional Benefits
+            </div>
+            <ion-item ng-repeat="item in listDataOptional" ng-click="showSubList(item.Title)">
+                {{item.Title}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

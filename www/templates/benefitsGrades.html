@@ -1,0 +1,15 @@
+<ion-view view-title="BenefitsSubList">
+    <ion-content id="BenefitsSubList">
+        <div class="bar bar-header bar-balanced">
+            <h1 class="title">Select A Category</h1>
+        </div>
+        <ion-list class="item-text-wrap">
+            <div class="item item-divider">
+                Insurance Benefits
+            </div>
+            <ion-item ng-repeat="item in listData" ng-click="selectGrade($index)">
+                {{item}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
