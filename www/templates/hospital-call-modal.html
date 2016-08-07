@@ -1,8 +1,16 @@
-<ion-modal-view>
-    <ion-header-bar>
-        <h1 class="title">My Modal title</h1>
-    </ion-header-bar>
-    <ion-content>
-        Hello!
+<ion-view view-title="HospitalList">
+    <div class="bar bar-header bar-balanced">
+        <div class="buttons">
+            <button class="button button-clear ion-close" ng-click="cancel()"></button>
+        </div>
+        <h1 class="title">Call Numbers</h1>
+    </div>
+    <ion-content class="has-header" padding="true">
+        <div class="item item-divider">
+            Click on Number to Dial!
+        </div>
+        <ion-item ng-repeat="x in numbers" ng-click="dial($index)">
+            <div>{{x}}</div>
+        </ion-item>
     </ion-content>
-</ion-modal-view>
+</ion-view>

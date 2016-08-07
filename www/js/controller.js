@@ -1,14 +1,12 @@
-
-
 angular.module('starter.controllers', [])
-    .controller('AppCtrl', function ($state) {
+    .controller('AppCtrl', function($state) {
         //$state.go('app.map');
 
     })
-    .controller('mapCtrl', function ($ionicPlatform, $ionicModal, $ionicPopup, ionicToast, $scope, $cordovaGeolocation, $ionicLoading) {
+    .controller('mapCtrl', function($ionicPlatform, $ionicModal, $ionicPopup, ionicToast, $scope, $cordovaGeolocation, $ionicLoading) {
         //$state.go('profile');
-	
-	
+
+
         document.addEventListener("deviceready", onDeviceReady, false);
 
         function onDeviceReady() {
@@ -21,7 +19,7 @@ angular.module('starter.controllers', [])
                 timeout: 10000,
                 maximumAge: 0
             };
-            $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
+            $cordovaGeolocation.getCurrentPosition(posOptions).then(function(position) {
                 var lat = 24.892249;
                 var long = 67.074715;
 
@@ -38,77 +36,99 @@ angular.module('starter.controllers', [])
                 $scope.map = map;
                 $ionicLoading.hide();
 
-            }, function (err) {
+            }, function(err) {
                 $ionicLoading.hide();
                 console.log(err);
             });
         }
     })
-    .controller('HomeCtrl', function ($cordovaFileOpener2, $rootScope, $ionicPlatform, $cordovaFile, $cordovaInAppBrowser, $ionicLoading, $scope, $state, $cordovaLocalNotification, $http, $timeout, $interval, $ionicModal, $ionicPopup, ionicToast, dataService) {
+    .controller('HomeCtrl', function($cordovaFileOpener2, localStorageService, $rootScope, $ionicPlatform, $cordovaFile, $cordovaInAppBrowser, $ionicLoading, $scope, $state, $cordovaLocalNotification, $http, $timeout, $interval, $ionicModal, $ionicPopup, ionicToast, dataService, $ionicLoading) {
 
-        //$cordovaGeolocation, 
+        //$cordovaGeolocation,
+        $scope.isLoading = false;
+        $ionicLoading.show({
+            content: 'Loading',
+            animation: 'fade-in',
+            showBackdrop: true,
+            maxWidth: 200,
+            showDelay: 0
+        });
+        console.log(localStorageService.get())
+        $timeout(function() {
+
+            if (isEmpty(localStorageService.get("loggedUser"))) {
+                $state.go('register')
+                $ionicLoading.hide();
+            } else {
+                $scope.isLoading = true;
+                $ionicLoading.hide();
+            }
+
+        }, 2000)
+
         $scope.status = "true";
         var count;
+
         function future() {
             $ionicPopup.alert({
                 title: 'Functionality to be implemented in the next Phase'
             });
         }
 
-        $scope.notify = function () {
+        $scope.notify = function() {
             future();
             //$state.go('map');
         };
 
-        $scope.profile = function () {
+        $scope.profile = function() {
             future();
             //$state.go('profile');
 
         };
 
-        $scope.nearByHospital = function () {
+        $scope.nearByHospital = function() {
             future();
         };
 
-        $scope.insurancePolicy = function () {
+        $scope.insurancePolicy = function() {
             future();
         };
 
-        $scope.settings = function () {
+        $scope.settings = function() {
             future();
         };
 
-        $scope.contact = function () {
+        $scope.contact = function() {
             $state.go('contact');
         };
 
-        $scope.ping = function () {
+        $scope.ping = function() {
             $state.go('ping');
 
         };
 
-        $scope.hospital = function () {
+        $scope.hospital = function() {
             $state.go('hospital');
         };
 
-        $scope.locationMaps = function (params) {
+        $scope.locationMaps = function(params) {
             future();
             //$state.go('locationMaps');
         }
 
-        $scope.feedback = function () {
+        $scope.feedback = function() {
             $state.go('feedback');
         }
-        
-        $scope.insurance_benefits = function () {
+
+        $scope.insurance_benefits = function() {
             $state.go('benefits');
         }
 
-        $scope.insurance_category = function () {
+        $scope.insurance_category = function() {
             future();
         }
 
-        $scope.form = function () {
+        $scope.form = function() {
 
             // var options = {
             //   location: 'no',
@@ -125,13 +145,13 @@ angular.module('starter.controllers', [])
             //   .catch(function (event) {
             //     alert("Error");
             //   });
-            
+
             console.log("External:" + cordova.file.external);
             console.log("Documents Directory:" + cordova.file.documentsDirectory);
             console.log("Data Directory:" + cordova.file.dataDirectory);
             console.log("External Directory:" + cordova.file.externalDataDirectory);
             $cordovaFile.copyFile("file:///android_asset/www/", "claimForm.pdf", "file:///storage/emulated/0/", "In-Patient Claim Form.pdf")
-                .then(function (success) {
+                .then(function(success) {
 
                     count = 0;
 
@@ -145,30 +165,30 @@ angular.module('starter.controllers', [])
                     })
 
 
-                }, function (error) {
+                }, function(error) {
                     alert(error.message);
                 });
 
-            cordova.plugins.notification.local.on("click", function (notification) {
+            cordova.plugins.notification.local.on("click", function(notification) {
                 if (count == 0) {
 
                     $cordovaFileOpener2.open(
                         'file:///storage/emulated/0/In-Patient Claim Form.pdf',
                         'application/pdf'
-                        ).then(function () {
-                            // file opened successfully
-                        }, function (err) {
-                            alert(err.message)
-                        });
+                    ).then(function() {
+                        // file opened successfully
+                    }, function(err) {
+                        alert(err.message)
+                    });
 
 
                     count++;
                 }
             });
-     
+
             //$cordovaFile.copyFile("file:///android_asset/www/","claimForm.pdf","files/");
             //window.open("file:///android_asset/www/claimForm.pdf", '_blank', ""); 
-      
+
         };
 
         // $scope.location = function () {
@@ -195,31 +215,39 @@ angular.module('starter.controllers', [])
         // };
 
     })
-    .controller('profileCtrl', function ($ionicPlatform, $cordovaSms, $ionicModal, $ionicPopup, $scope, $state, $cordovaLocalNotification, $http, $timeout, $interval, ionicToast) {
+    .controller('profileCtrl', function($ionicPlatform, $cordovaSms, $ionicModal, $ionicPopup, $scope, $state, $cordovaLocalNotification, $http, $timeout, $interval, ionicToast) {
 
 
 
     })
-    .controller('feedbackCtrl', function ($scope) {
+    .controller('feedbackCtrl', function($scope) {
         $scope.emailText = [];
-        $scope.sendEmail = function () {
+        $scope.sendEmail = function() {
             if (window.plugins && window.plugins.emailComposer) {
-                window.plugins.emailComposer.showEmailComposerWithCallback(function (result) {
-                    alert(result);
-                },
+                window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
+                        alert(result);
+                    },
                     "Feedback From " + $scope.emailText[0].name + " For Engro Health Insurance(Phase I) ", // Subject
-                    $scope.emailText[0].body,                      // Body
-                    ["wkhawar@engrofoods.com", "mtalhajamil93@gmail.com", "ameerhamza810@gmail.com", "s.wasiq.muhammad@gmail.com"],    // To
-                    null,                    // CC
-                    null,                    // BCC
-                    false,                   // isHTML
-                    null,                    // Attachments
-                    null);                   // Attachment Data
+                    $scope.emailText[0].body, // Body
+                    ["wkhawar@engrofoods.com", "mtalhajamil93@gmail.com", "ameerhamza810@gmail.com", "s.wasiq.muhammad@gmail.com"], // To
+                    null, // CC
+                    null, // BCC
+                    false, // isHTML
+                    null, // Attachments
+                    null); // Attachment Data
             }
         }
     })
-    .controller('PingCtrl', function ($cordovaSms, $scope, $ionicPopup) {
+    .controller('PingCtrl', function($cordovaSms, $scope, $ionicPopup, localStorageService) {
+        $scope.user = localStorageService.get("loggedUser")
+        console.log($scope.user)
         $scope.listdata = [];
+        $scope.listdata[0] = {
+            name: $scope.user.name,
+            pno: $scope.user.po_no,
+            msg: $scope.user.message
+        }
+
         $scope.contacts = [];
         // $scope.listdata[0].msg = "Not Defined by sender";
         // $scope.listdata[0].name = "Not Defined by sender";
@@ -230,16 +258,15 @@ angular.module('starter.controllers', [])
         $scope.contacts.push({ "name": "Noor", "number": "0323297461" });
         $scope.contacts.push({ "name": "Ameer Hamza", "number": "03462651725" });
 
-        $scope.sendSMS = function () {
+        $scope.sendSMS = function() {
             $ionicPopup.show({
                 title: "Are you sure you want to send this SMS?",
                 scope: $scope,
                 buttons: [
-                    { text: 'Cancel' },
-                    {
+                    { text: 'Cancel' }, {
                         text: '<b>Send</b>',
                         type: 'button-positive',
-                        onTap: function (e) {
+                        onTap: function(e) {
                             send();
                         }
                     },
@@ -250,12 +277,11 @@ angular.module('starter.controllers', [])
         function send() {
             var failed = 0;
             var sent = 0;
-            var SMS = "Dear Insurance Members:\n\nEmergency MSG:" + $scope.listdata[0].msg + "\n\nName:"
-                + $scope.listdata[0].name + "\n\nPNo:" + $scope.listdata[0].pno + "\n\nLocation:" + $scope.listdata[0].location;
+            var SMS = "Dear Insurance Members:\n\nEmergency MSG:" + $scope.listdata[0].msg + "\n\nName:" + $scope.listdata[0].name + "\n\nPNo:" + $scope.listdata[0].pno + "\n\nLocation:" + $scope.listdata[0].location;
             for (var index = 0; index < $scope.contacts.length; index++) {
                 $cordovaSms
                     .send($scope.contacts[index].number, SMS, 'options')
-                    .then(function () {
+                    .then(function() {
                         sent++
 
                         if (sent == $scope.contacts.length) {
@@ -264,7 +290,7 @@ angular.module('starter.controllers', [])
                             });
                         }
 
-                    }, function (error) {
+                    }, function(error) {
                         failed++;
                         if (failed == $scope.contacts.length) {
                             $ionicPopup.alert({
@@ -276,113 +302,147 @@ angular.module('starter.controllers', [])
         }
 
     })
-    .controller('HospitalCtrl', function ($cordovaSms, $scope, $state, $ionicPopup, dataService, cityService) {
+    .controller('HospitalCtrl', function($cordovaSms, $scope, $state, $ionicPopup, dataService, cityService) {
 
         $scope.listdata = [];
         $scope.listdata = dataService.getCities();
 
-        $scope.selectCity = function (cityName) {
+        $scope.selectCity = function(cityName) {
             cityService.setCityName(cityName);
             $state.go('hospitalList');
         }
 
     })
-    .controller('HospitalListCtrl', function ($ionicModal,$cordovaGeolocation, $cordovaSms, $scope, $state, $ionicPopup, dataService, cityService) {
 
-        $scope.listdata = [];
-        $scope.listdata = dataService.getCityHospitals(cityService.getCityName());
+.controller('RegisterCtrl', function($scope, localStorageService, $state) {
+    $scope.user = {}
 
-        $scope.showDetails = function (SNo) {
-            for (var index = 0; index < $scope.listdata.length; index++) {
-                if ($scope.listdata[index].SNo == SNo) {
-                    var element = $scope.listdata[index];
-                    break;
-                }
+    $scope.submit = function() {
+        console.log($scope.user)
+        localStorageService.set("loggedUser", $scope.user)
+        $state.go('home');
+    }
+})
+
+.controller('HospitalListCtrl', function($ionicModal, $cordovaGeolocation, appModalService, $cordovaSms, $scope, $state, $ionicPopup, dataService, cityService, $rootScope) {
+
+    $scope.listdata = [];
+    $scope.listdata = dataService.getCityHospitals(cityService.getCityName());
+
+    $scope.showDetails = function(SNo) {
+        for (var index = 0; index < $scope.listdata.length; index++) {
+            if ($scope.listdata[index].SNo == SNo) {
+                var element = $scope.listdata[index];
+                break;
             }
-
-            $ionicPopup.show({
-                title: element.HospitalName + '<br /><br />' + element.Telephone,
-                subTitle: element.Address + '<br />' + element.City
-                + "(" + element.Extension + ")"
-                + '<br />Latitiude: ' + element.lat
-                + '<br />Longitude: ' + element.lon,
-                scope: $scope,
-                buttons: [
-                    { text: 'Cancel' },
-                    {
-                        text: '<b>Call</b>',
-                        type: 'button-positive',
-                        onTap: function (e) {
-                            var numbersToCall = element.Telephone.replace(" ",'');;
-                            var indices = [];
-                            var numbers = [];
-                            var startingIndex = 0;
-                            for(var i=0; i<numbersToCall.length;i++) {
-                                if (numbersToCall[i] === "/") indices.push(i);
-                            }
-                            indices.push(numbersToCall.length);
-                            
-                            for(var i=0; i<indices.length;i++) {
-                                numbers.push(numbersToCall.substr(startingIndex,indices[i]));
-                                startingIndex = indices[i] + 1;
-                            }
-                            console.log(indices);
-                            console.log(numbersToCall);
-                            for(var i=0; i<numbers.length;i++) {
-                                //numbers[i] = numbers[i].replace(" ",'');
-                                console.log(numbers);
-                                if(numbers[i][0] != "0"){
-                                    
-                                    var indexOfDash = numbers[i].indexOf("-");
-                                    if(indexOfDash != -1){
-                                        numbers[i] = numbers[i].substr(0,indexOfDash);
-                                    }
-                                    
-                                    numbers[i] = element.Extension + numbers[i];
-                                    
-                                }
-                                numbers[i] = numbers[i].substring(1);
-                                numbers[i] = numbers[i].replace(/\D/g,'');
-                                numbers[i] = "0092" + numbers[i];
-                            }
-                            console.log(numbers);
-                        }
-                    }
-                ]
-            });
-
         }
-        
-       
 
-    })
-    .controller('benefitsCtrl', function ($cordovaSms, $scope, $state, $ionicPopup, dataService,benefitsService) {
+        $ionicPopup.show({
+            title: element.HospitalName + '<br /><br />' + element.Telephone,
+            subTitle: element.Address + '<br />' + element.City + "(" + element.Extension + ")" + '<br />Latitiude: ' + element.lat + '<br />Longitude: ' + element.lon,
+            scope: $scope,
+            buttons: [
+                { text: 'Cancel' }, {
+                    text: '<b>Call</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                        var numbersToCall = element.Telephone.replace(" ", '');
+                        var indices = [];
+                        var numbers = [];
+                        var startingIndex = 0;
+                        for (var i = 0; i < numbersToCall.length; i++) {
+                            if (numbersToCall[i] === "/") indices.push(i);
+                        }
+                        indices.push(numbersToCall.length);
 
-        $scope.listData = ["Category A","Category B","Category C"];
+                        for (var i = 0; i < indices.length; i++) {
+                            numbers.push(numbersToCall.substr(startingIndex, indices[i]));
+                            startingIndex = indices[i] + 1;
+                        }
+                        console.log(indices);
+                        for (var i = 0; i < numbers.length; i++) {
+                            numbers[i] = numbers[i].replace(" ", '');
+                            console.log(numbers);
+                            if (numbers[i][0] != "0") {
 
-        $scope.selectGrade = function (index) {
+                                var indexOfDash = numbers[i].indexOf("-");
+                                if (indexOfDash != -1) {
+                                    numbers[i] = numbers[i].substr(0, indexOfDash);
+                                }
+
+                                numbers[i] = element.Extension + numbers[i];
+
+                            }
+                            numbers[i] = numbers[i].substring(1);
+                            numbers[i] = numbers[i].replace(/\D/g, '');
+                            numbers[i] = "0092" + numbers[i];
+                        }
+                        console.log(numbers);
+                        $rootScope.numberToDial = numbers;
+
+                        if (numbers.length <= 1) {
+                            window.open('tel:' + numbers[0], '_system', 'location=yes')
+                        } else {
+
+                            appModalService.show('templates/hospital-call-modal.html', 'HospitalModalCtrl as vm', { num: numbers }).then(function(res) {
+                                console.log(res)
+                                if (res != null) {
+
+                                }
+                            })
+                        }
+
+                    }
+                }
+            ]
+        });
+
+    }
+
+
+
+})
+
+.controller('HospitalModalCtrl', function($scope, $rootScope) {
+
+    console.log($rootScope.numberToDial)
+    $scope.numbers = $rootScope.numberToDial;
+    $scope.dial = function(index) {
+        window.open('tel:' + $scope.numbers[index], '_system', 'location=yes')
+    }
+
+    $scope.cancel = function() {
+        $scope.closeModal(null);
+    };
+})
+
+.controller('benefitsCtrl', function($cordovaSms, $scope, $state, $ionicPopup, dataService, benefitsService) {
+
+        $scope.listData = ["Category A", "Category B", "Category C"];
+
+        $scope.selectGrade = function(index) {
             benefitsService.setGrade(index);
             $state.go('benefitsTopList');
         }
 
     })
-    .controller('benefitsTopListCtrl', function ($location,$cordovaSms, $scope, $state, $ionicPopup, dataService,benefitsService) {
+    .controller('benefitsTopListCtrl', function($location, $cordovaSms, $scope, $state, $ionicPopup, dataService, benefitsService) {
 
         $scope.listDataOptional = [];
         $scope.listDataOptional = dataService.getBenefitsTopLayer("optional");
-        
+
         $scope.listDataUnOptional = [];
         $scope.listDataUnOptional = dataService.getBenefitsTopLayer("unoptional");
 
-        $scope.showSubList = function (title) {
+        $scope.showSubList = function(title) {
             benefitsService.setTitle(title);
             console.log($state);
             //$state.go('benefitsSubList');
-            $location.url('benefitsSubList') 
+            $location.url('benefitsSubList')
         }
 
     })
-    .controller('benefitsSubListCtrl', function ($cordovaSms, $scope, $state, $ionicPopup, dataService,benefitsService) {
+    .controller('benefitsSubListCtrl', function($cordovaSms, $scope, $state, $ionicPopup, dataService, benefitsService) {
         console.log("Reached here");
         console.log($state);
         $scope.listData = [];
@@ -390,28 +450,27 @@ angular.module('starter.controllers', [])
         console.log(tempList);
         console.log(benefitsService.getGrade());
         var grade = benefitsService.getGrade();
-        for(var index = 0 ; index < tempList.length; index++){
-            if("GradeAll" in tempList[index]){
-                $scope.listData.push({"Title":tempList[index].Title, "Info":tempList[index].GradeAll})
-            }
-            else{
-                switch(grade){
-                   case 0:
-                        $scope.listData.push({"Title":tempList[index].Title, "Info":tempList[index].GradeA})
+        for (var index = 0; index < tempList.length; index++) {
+            if ("GradeAll" in tempList[index]) {
+                $scope.listData.push({ "Title": tempList[index].Title, "Info": tempList[index].GradeAll })
+            } else {
+                switch (grade) {
+                    case 0:
+                        $scope.listData.push({ "Title": tempList[index].Title, "Info": tempList[index].GradeA })
                         break;
-                   case 1:
-                        $scope.listData.push({"Title":tempList[index].Title, "Info":tempList[index].GradeB})
+                    case 1:
+                        $scope.listData.push({ "Title": tempList[index].Title, "Info": tempList[index].GradeB })
                         break;
-                   case 2:
-                        $scope.listData.push({"Title":tempList[index].Title, "Info":tempList[index].GradeC})
-                        break; 
+                    case 2:
+                        $scope.listData.push({ "Title": tempList[index].Title, "Info": tempList[index].GradeC })
+                        break;
                 }
-                
+
             }
         }
-       benefitsService.setTitle("");
+        benefitsService.setTitle("");
     })
-// .controller('locationMapsCtrl', function ($scope, NgMap) {
+    // .controller('locationMapsCtrl', function ($scope, NgMap) {
 
 //   var vm = this;
 //   NgMap.getMap().then(function (map) {
@@ -424,39 +483,37 @@ angular.module('starter.controllers', [])
 //     };
 //   });
 // })
-    .controller('ContactCtrl', function ($cordovaSms, $scope, $state, $ionicPopup) {
+.controller('ContactCtrl', function($cordovaSms, $scope, $state, $ionicPopup) {
 
-        $scope.listdata = [];
-        $scope.listdata.push({ "name": "Medical Hotline South (Dr. Salman) 1", "number": "03002018246" });
-        $scope.listdata.push({ "name": "Medical Hotline South (Dr. Salman) 2", "number": "0340004489" });
-        $scope.listdata.push({ "name": "Landline Number", "number": "02132410054" });
-        $scope.listdata.push({ "name": "Call Centre", "number": "0800-00242" });
-        $scope.listdata.push({ "name": "Medical Hotline Central (Dr. Munazza)", "number": "03317333200" });
-        $scope.listdata.push({ "name": "Manager Relationship (Mohsin Murtaza Hussain)", "number": "03028228254" });
-        $scope.listdata.push({ "name": "Officer Relationship (Zafar Ahmed)", "number": "03400004468" });
-        $scope.listdata.push({ "name": "Head of Misc. Dept. (Shaikh Babar)", "number": "0302-8297044" });
-        $scope.listdata.push({ "name": "Waleed Khawar", "number": "03028285155" });
+    $scope.listdata = [];
+    $scope.listdata.push({ "name": "Medical Hotline South (Dr. Salman) 1", "number": "03002018246" });
+    $scope.listdata.push({ "name": "Medical Hotline South (Dr. Salman) 2", "number": "0340004489" });
+    $scope.listdata.push({ "name": "Landline Number", "number": "02132410054" });
+    $scope.listdata.push({ "name": "Call Centre", "number": "0800-00242" });
+    $scope.listdata.push({ "name": "Medical Hotline Central (Dr. Munazza)", "number": "03317333200" });
+    $scope.listdata.push({ "name": "Manager Relationship (Mohsin Murtaza Hussain)", "number": "03028228254" });
+    $scope.listdata.push({ "name": "Officer Relationship (Zafar Ahmed)", "number": "03400004468" });
+    $scope.listdata.push({ "name": "Head of Misc. Dept. (Shaikh Babar)", "number": "0302-8297044" });
+    $scope.listdata.push({ "name": "Waleed Khawar", "number": "03028285155" });
 
-        $scope.showContact = function (num) {
+    $scope.showContact = function(num) {
 
-            $ionicPopup.show({
-                title: $scope.listdata[num].name,
-                subTitle: $scope.listdata[num].number,
-                scope: $scope,
-                buttons: [
-                    { text: 'Cancel' },
-                    {
-                        text: '<b>Call</b>',
-                        type: 'button-positive',
-                        onTap: function (e) {
-                            window.open('tel:' + $scope.listdata[num].number, '_system', 'location=yes')
+        $ionicPopup.show({
+            title: $scope.listdata[num].name,
+            subTitle: $scope.listdata[num].number,
+            scope: $scope,
+            buttons: [
+                { text: 'Cancel' }, {
+                    text: '<b>Call</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                        window.open('tel:' + $scope.listdata[num].number, '_system', 'location=yes')
                             //window.location.href = 'tel:' + $scope.listdata[num].number;
-                        }
-                    },
-                ]
-            });
+                    }
+                },
+            ]
+        });
 
-        }
+    }
 
-    });
-
+});

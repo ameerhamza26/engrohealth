@@ -1,9 +1,11 @@
 <ion-view view-title="Feedback">
-    <ion-content id="Feedback">
-        <div class="bar bar-header bar-balanced">
-            <h1 class="title">Send Feedback Email</h1>
+    <div class="bar bar-header bar-balanced">
+        <div class="buttons">
+            <button class="button button-clear ion-ios-arrow-back" ng-click="$ionicGoBack()"></button>
         </div>
-        <br /><br /><br />
+        <h1 class="title">Feedback</h1>
+    </div>
+    <ion-content id="Feedback" class="has-header" padding="true">
         <div>
             <label class="item item-input">
                 <textarea type="text" ng-model="emailText[0].name" placeholder="Your Name"></textarea>

@@ -1,83 +1,131 @@
+<style>
+/*.border-style {
+    border-bottom-style: solid;
+    border-bottom-color: rgba(0, 0, 0, 0.4);
+    border-bottom-width: thin;
+}
+
+.border-left-style {
+    border-left-style: solid;
+    border-left-color: rgba(0, 0, 0, 0.4);
+    border-left-width: thin;
+}
+
+.border-top-style {
+    border-top-style: solid;
+    border-top-color: rgba(0, 0, 0, 0.4);
+    border-top-width: thin;
+}*/
+
+.paragraph-style {
+    margin-top: 10px;
+    font-size: 14px;
+    /* font-weight: bold; */
+    font-style: italic;
+}
+</style>
 <ion-view view-title="Home">
     <ion-content id="back1">
-        <img style="width: 200px"  src="engro-foods-logo.png">
-        <img style="float:right; width: 90px"  src="engro-life-logo.gif">
+        <img style="width: 200px" src="engro-foods-logo.png">
+        <img style="float:right; width: 90px" src="engro-life-logo.gif">
         <!--<div class="bar bar-balanced">
             <h3 class="title" id="hg"></h3>
         </div>-->
-        
         <div class="bar bar-balanced">
             <h3 class="title">Engro Health</h3>
         </div>
-        
         <h2 class="text-center" style="color:green"><pre> </pre></h2>
-
-
-        <div class="containerCover" ng-click="profile()" hidden>
-            <button class="myown"><img src="img/user.png"/></button>
-            <button class="button button-outline button-balanced caption">User Profile</button>
+        <div ng-if="isLoading" style="position: relative; margin-top:-25px;">
+            <div ng-click="ping()" class="border-style border-top-style" style="position: absolute; width: 50%; height: 130px;">
+                <div style="width: 60px; height: 60px; margin-top:25px; margin-left:auto; margin-right:auto;">
+                    <img src="img/icons/ping.png" style="width:100%; height:100%; ">
+                </div>
+                <p class="paragraph-style" style="text-align:center;">Emergency ping</p>
+            </div>
+            <div ng-click="contact()" class="border-style border-left-style border-top-style" style="position: absolute; width: 50%; height: 130px; left: 50%">
+                <div style="width: 60px; height: 60px; margin-top:25px; margin-left:auto; margin-right:auto;">
+                    <img src="img/icons/contact.png" style="width:100%; height:100%; ">
+                </div>
+                <p class="paragraph-style" style="text-align:center;">Emergency contacts</p>
+            </div>
+            <div ng-click="form()" class="border-style" style="position: absolute; width: 50%; height: 130px; top: 130px;">
+                <div style="width: 60px; height: 60px; margin-top:25px; margin-left:auto; margin-right:auto;">
+                    <img src="img/icons/download.png" style="width:100%; height:100%; ">
+                </div>
+                <p class="paragraph-style" style="text-align:center;">Download Form</p>
+            </div>
+            <div ng-click="hospital()" class="border-style border-left-style" style="position: absolute; width: 50%; height: 130px; left: 50%; top: 130px;">
+                <div style="width: 60px; height: 60px; margin-top:25px; margin-left:auto; margin-right:auto;">
+                    <img src="img/icons/hospital.png" style="width:100%; height:100%; ">
+                </div>
+                <p class="paragraph-style" style="text-align:center;">Hospital Lists</p>
+            </div>
+            <div ng-click="insurance_benefits()" class="border-style" style="position: absolute; width: 50%; height: 130px; top: 260px;">
+                <div style="width: 60px; height: 60px; margin-top:25px; margin-left:auto; margin-right:auto;">
+                    <img src="img/icons/insurance.png" style="width:100%; height:100%; ">
+                </div>
+                <p class="paragraph-style" style="text-align:center;">Insurance Benefits</p>
+            </div>
+            <div ng-click="feedback()" class="border-style border-left-style" style="position: absolute; width: 50%; height: 130px; left: 50%; top: 260px;">
+                <div style="width: 60px; height: 60px; margin-top:25px; margin-left:auto; margin-right:auto;">
+                    <img src="img/icons/ping.png" style="width:100%; height:100%; ">
+                </div>
+                <p class="paragraph-style" style="text-align:center;">Feedback</p>
+            </div>
         </div>
-
-        <div class="containerCover" ng-click="ping()">
-            <button class="myown"><img src="img/emergency.png"/></button>
-            <button class="button button-outline button-balanced caption">Emergency Ping</button>
-        </div>
-
-        <div class="containerCover" ng-click="contact()">
-            <button class="myown"><img src="img/emergency_contact.png"/></button>
-            <button class="button button-outline button-balanced caption">Emergency Contacts</button>
-        </div>
-
-        <div class="containerCover" ng-click="form()">
-            <button class="myown"><img src="img/download.png"/></button>
-            <button class="button button-outline button-balanced caption">Download Form</button>
-        </div>
-
-        </div>
-        <div class="containerCover" ng-click="location()" hidden>
-            <button class="myown"><img src="img/location.png"/></button>
-            <button class="button button-outline button-balanced caption">Your Location</button>
-        </div>
-
-        <div class="containerCover" ng-click="hospital()">
-            <button class="myown"><img src="img/hospital_list.png"/></button>
-            <button class="button button-outline button-balanced caption">Hospital List</button>
-        </div>
-
-        <div class="containerCover" ng-show="{{$parent.status}}" ng-click="nearByHospital()" hidden>
-            <button class="myown"><img src="img/hos.png"/></button>
-            <button class="button button-outline button-balanced caption">Nearby Hospital</button>
-        </div>
-        
-        <!--
+        <div ng-if="isLoading" ng-hide="true">
+            <div class="containerCover" ng-click="profile()" ng-hide="true">
+                <button class="myown"><img src="img/user.png" /></button>
+                <button class="button button-outline button-balanced caption">User Profile</button>
+            </div>
+            <div class="containerCover" ng-click="ping()">
+                <button class="myown"><img src="img/emergency.png" /></button>
+                <button class="button button-outline button-balanced caption">Emergency Ping</button>
+            </div>
+            <div class="containerCover" ng-click="contact()">
+                <button class="myown"><img src="img/emergency_contact.png" /></button>
+                <button class="button button-outline button-balanced caption">Emergency Contacts</button>
+            </div>
+            <div class="containerCover" ng-click="form()">
+                <button class="myown"><img src="img/download.png" /></button>
+                <button class="button button-outline button-balanced caption">Download Form</button>
+            </div>
+            <div class="containerCover" ng-click="location()" ng-hide="true">
+                <button class="myown"><img src="img/location.png" /></button>
+                <button class="button button-outline button-balanced caption">Your Location</button>
+            </div>
+            <div class="containerCover" ng-click="hospital()">
+                <button class="myown"><img src="img/hospital_list.png" /></button>
+                <button class="button button-outline button-balanced caption">Hospital List</button>
+            </div>
+            <div class="containerCover" ng-show="{{$parent.status}}" ng-click="nearByHospital()" ng-hide="true">
+                <button class="myown"><img src="img/hos.png" /></button>
+                <button class="button button-outline button-balanced caption">Nearby Hospital</button>
+            </div>
+            <!--
         <div class="containerCover" ng-click="insurancePolicy()">
             <button class="myown"><img src="img/issurance_policy.png"/></button>
             <button class="button button-outline button-balanced caption">Insurance Policy</button>
         </div>
         -->
-
-
-         <div class="containerCover" ng-click="feedback()">
-            <button class="myown"><img src="img/feedback.png"/></button>
-            <button class="button button-outline button-balanced caption">Feedback</button>
-        </div>
-
-        <div class="containerCover" ng-click="insurance_benefits()">
-            <button class="myown"><img src="img/inssurance_amount.png"/></button>
-            <button class="button button-outline button-balanced caption">Insurance Benifits</button>
-        </div>
-
-        <!-- 
+            <div class="containerCover" ng-click="feedback()">
+                <button class="myown"><img src="img/feedback.png" /></button>
+                <button class="button button-outline button-balanced caption">Feedback</button>
+            </div>
+            <div class="containerCover" ng-click="insurance_benefits()">
+                <button class="myown"><img src="img/inssurance_amount.png" /></button>
+                <button class="button button-outline button-balanced caption">Insurance Benifits</button>
+            </div>
+            <!-- 
         <div class="containerCover" ng-click="insurance_category()">
             <button class="myown"><img src="img/inssurance_cat.png"/></button>
             <button class="button button-outline button-balanced caption">Insurance Category</button>
         </div>
         -->
-        
-        <div class="containerCover" ng-click="settings()" hidden>
-            <button class="myown"><img src="img/user_settings.png"/></button>
-            <button class="button button-outline button-balanced caption">User Settings</button>
+            <div class="containerCover" ng-click="settings()" ng-hide="true">
+                <button class="myown"><img src="img/user_settings.png" /></button>
+                <button class="button button-outline button-balanced caption">User Settings</button>
+            </div>
         </div>
     </ion-content>
-
 </ion-view>
