@@ -346,7 +346,7 @@ angular.module('starter.controllers', [])
                     text: '<b>Call</b>',
                     type: 'button-positive',
                     onTap: function(e) {
-                        var numbersToCall = element.Telephone;
+                        var numbersToCall = element.Telephone.replace(" ",'');
                         var indices = [];
                         var numbers = [];
                         var startingIndex = 0;
