@@ -253,10 +253,22 @@ angular.module('starter.controllers', [])
         // $scope.listdata[0].name = "Not Defined by sender";
         // $scope.listdata[0].location = "Not Defined by sender";
         // $scope.listdata[0].pno = "Not Defined by sender" ;
-        $scope.contacts.push({ "name": "Waleed Khawar", "number": "03028285155" });
-        $scope.contacts.push({ "name": "Muhammad Talha", "number": "03126995968" });
-        $scope.contacts.push({ "name": "Noor", "number": "0323297461" });
-        $scope.contacts.push({ "name": "Ameer Hamza", "number": "03462651725" });
+        $scope.contacts.push({ "name": "Anis", "location": "", "number": "03400004389", "team":"Adamjee Team"});
+        $scope.contacts.push({ "name": "Mohsin", "location": "", "number": "03028228254", "team":"Adamjee Team"});
+        $scope.contacts.push({ "name": "Zulfiqar Ali", "location": "Sahiwal - Plant","number": "03028690677", "team":"Engro HR"});
+        $scope.contacts.push({ "name": "Shumaila Sheikh", "location": "Sukkur - Plant","number": "080000242", "team":"Engro HR"});
+        $scope.contacts.push({ "name": "Saqib Riaz", "location": "Ice Cream","number": "03005193279", "team":"Engro HR"});
+        $scope.contacts.push({ "name": "Syed Sajjad Ali", "location": "Marketing","number": "03002611012", "team":"Engro HR"});
+        $scope.contacts.push({ "name": "Muhammad Atif - Nara", "location": "Nara","number": "03413764484", "team":"Engro HR"});
+        $scope.contacts.push({ "name": "Vanessa", "location": "Dairy Sales","number": "03000200627", "team":"Engro HR"});
+        $scope.contacts.push({ "name": "Shakeel", "location": "Dairy Sales","number": "03074920297", "team":"Engro HR"});
+        $scope.contacts.push({ "name": "Naeem Ahmed", "location": "MPAS Head Office","number": "03077772316", "team":"Engro HR"});
+        $scope.contacts.push({ "name": "Ali Mubeen", "location": "MPAS - Skr","number": "0302-8693282", "team":"Engro HR"});
+        $scope.contacts.push({ "name": "Ameerzada Mumtaz", "location": "MPAS - Jhang","number": "03028690673", "team":"Engro HR"});
+        $scope.contacts.push({ "name": "Hassan Nazir", "location": "MPAS - Swl Zone 3","number": "03028266312", "team":"Engro HR"});
+        $scope.contacts.push({ "name": "Muhammad Asif", "location": "MPAS - Bhawalpur","number": "03028245389", "team":"Engro HR"});
+        $scope.contacts.push({ "name": "Muhammad Ahsan", "location": "C & B","number": "03000200676", "team":"C & B (Head Office)"});
+        $scope.contacts.push({ "name": "Waleed Khawar", "location": "C & B","number": "03028285155", "team":"C & B (Head Office)"});
 
         $scope.sendSMS = function() {
             $ionicPopup.show({
