@@ -1,22 +1,10 @@
 <ion-view view-title="Profile">
-    <div class="bar bar-header bar-balanced">
-        <div class="buttons">
-            <button class="button button-clear ion-ios-arrow-back" ng-click="$ionicGoBack()"></button>
-        </div>
-        <h1 class="title">Emergency Contacts</h1>
-    </div>
+    <header-bar texta="header.texta" textb="header.textb" img="header.img" subicon="header.subicon"></header-bar>
     <ion-content class="has-header" padding="true">
-		 
-    
-     <ion-list>
-                <ion-item ng-repeat="item in listdata" ng-click="showContact($index)">
-                   {{item.name}}
-                </ion-item>
-                
-
-            </ion-list>
-    
-        
- 
+        <ion-list>
+            <ion-item ng-repeat="item in listdata" ng-click="showContact($index)">
+                {{item.name}}
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-view>
