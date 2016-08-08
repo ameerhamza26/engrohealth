@@ -486,15 +486,22 @@ angular.module('starter.controllers', [])
 .controller('ContactCtrl', function($cordovaSms, $scope, $state, $ionicPopup) {
 
     $scope.listdata = [];
-    $scope.listdata.push({ "name": "Medical Hotline South (Dr. Salman) 1", "number": "03002018246" });
-    $scope.listdata.push({ "name": "Medical Hotline South (Dr. Salman) 2", "number": "0340004489" });
-    $scope.listdata.push({ "name": "Landline Number", "number": "02132410054" });
-    $scope.listdata.push({ "name": "Call Centre", "number": "0800-00242" });
-    $scope.listdata.push({ "name": "Medical Hotline Central (Dr. Munazza)", "number": "03317333200" });
-    $scope.listdata.push({ "name": "Manager Relationship (Mohsin Murtaza Hussain)", "number": "03028228254" });
-    $scope.listdata.push({ "name": "Officer Relationship (Zafar Ahmed)", "number": "03400004468" });
-    $scope.listdata.push({ "name": "Head of Misc. Dept. (Shaikh Babar)", "number": "0302-8297044" });
-    $scope.listdata.push({ "name": "Waleed Khawar", "number": "03028285155" });
+    $scope.listdata.push({ "name": "Anis", "location": "", "number": "03400004389", "team":"Adamjee Team"});
+    $scope.listdata.push({ "name": "Mohsin", "location": "", "number": "03028228254", "team":"Adamjee Team"});
+    $scope.listdata.push({ "name": "Zulfiqar Ali", "location": "Sahiwal - Plant","number": "03028690677", "team":"Engro HR"});
+    $scope.listdata.push({ "name": "Shumaila Sheikh", "location": "Sukkur - Plant","number": "080000242", "team":"Engro HR"});
+    $scope.listdata.push({ "name": "Saqib Riaz", "location": "Ice Cream","number": "03005193279", "team":"Engro HR"});
+    $scope.listdata.push({ "name": "Syed Sajjad Ali", "location": "Marketing","number": "03002611012", "team":"Engro HR"});
+    $scope.listdata.push({ "name": "Muhammad Atif - Nara", "location": "Nara","number": "03413764484", "team":"Engro HR"});
+    $scope.listdata.push({ "name": "Vanessa", "location": "Dairy Sales","number": "03000200627", "team":"Engro HR"});
+    $scope.listdata.push({ "name": "Shakeel", "location"="Dairy Sales","number": "03074920297", "team":"Engro HR"});
+    $scope.listdata.push({ "name": "Naeem Ahmed", "location"="MPAS Head Office","number": "03077772316", "team":"Engro HR"});
+    $scope.listdata.push({ "name": "Ali Mubeen", "location"="MPAS - Skr","number": "0302-8693282", "team":"Engro HR"});
+    $scope.listdata.push({ "name": "Ameerzada Mumtaz", "location"="MPAS - Jhang","number": "03028690673", "team":"Engro HR"});
+    $scope.listdata.push({ "name": "Hassan Nazir", "location"="MPAS - Swl Zone 3","number": "03028266312", "team":"Engro HR"});
+    $scope.listdata.push({ "name": "Muhammad Asif", "location"="MPAS - Bhawalpur","number": "03028245389", "team":"Engro HR"});
+    $scope.listdata.push({ "name": "Muhammad Ahsan", "location"="C & B","number": "03000200676", "team":"Engro HR"});
+    $scope.listdata.push({ "name": "Waleed Khawar", "location"="C & B","number": "03028285155", "team":"Engro HR"});
 
     $scope.showContact = function(num) {
 
