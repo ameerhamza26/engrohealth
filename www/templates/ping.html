@@ -23,7 +23,7 @@
                 <textarea type="text" ng-model="listdata[0].msg" placeholder="Your Emergency Message"></textarea>
             </label>
             <div class="item item-divider" style="margin-top:10px;">
-                Select numbers to send SMS
+                Select names to send SMS
             </div>
             <ion-item ng-repeat="item in contacts" class="item-text-wrap">
                 <ion-checkbox ng-model="item.enabled">{{item.name}}</ion-checkbox>
