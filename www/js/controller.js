@@ -44,7 +44,12 @@ angular.module('starter.controllers', [])
     })
     .controller('HomeCtrl', function($cordovaFileOpener2, localStorageService, $rootScope, $ionicPlatform, $cordovaFile, $cordovaInAppBrowser, $ionicLoading, $scope, $state, $cordovaLocalNotification, $http, $timeout, $interval, $ionicModal, $ionicPopup, ionicToast, dataService, $ionicLoading) {
 
-        //$cordovaGeolocation,
+        $scope.header = {
+                texta: 'eng',
+                textb: 'sure',
+                img: 'img/icons/logo.png'
+            }
+            //$cordovaGeolocation,
         $scope.isLoading = false;
         $ionicLoading.show({
             content: 'Loading',
@@ -221,6 +226,12 @@ angular.module('starter.controllers', [])
 
     })
     .controller('feedbackCtrl', function($scope) {
+        $scope.header = {
+            texta: 'feedback',
+            textb: '',
+            img: 'img/icons/engsure app icon for PNG-14.png',
+            subicon: true
+        }
         $scope.emailText = [];
         $scope.sendEmail = function() {
             if (window.plugins && window.plugins.emailComposer) {
@@ -239,6 +250,12 @@ angular.module('starter.controllers', [])
         }
     })
     .controller('PingCtrl', function($cordovaSms, $scope, $ionicPopup, localStorageService) {
+        $scope.header = {
+            texta: 'emergency',
+            textb: 'ping',
+            img: 'img/icons/engsure app icon for PNG-09.png',
+            subicon: true
+        }
         $scope.user = localStorageService.get("loggedUser")
         console.log($scope.user)
         $scope.listdata = [];
@@ -328,7 +345,12 @@ angular.module('starter.controllers', [])
 
     })
     .controller('HospitalCtrl', function($cordovaSms, $scope, $state, $ionicPopup, dataService, cityService) {
-
+        $scope.header = {
+            texta: 'hospital',
+            textb: 'list',
+            img: 'img/icons/engsure app icon for PNG-12.png',
+            subicon: true
+        }
         $scope.listdata = [];
         $scope.listdata = dataService.getCities();
 
@@ -341,7 +363,11 @@ angular.module('starter.controllers', [])
 
 .controller('RegisterCtrl', function($scope, localStorageService, $state) {
     $scope.user = {}
-
+    $scope.header = {
+        texta: 'eng',
+        textb: 'sure',
+        img: 'img/icons/logo.png'
+    }
     $scope.submit = function() {
         console.log($scope.user)
         localStorageService.set("loggedUser", $scope.user)
@@ -353,7 +379,12 @@ angular.module('starter.controllers', [])
 
     $scope.listdata = [];
     $scope.listdata = dataService.getCityHospitals(cityService.getCityName());
-
+    $scope.header = {
+        texta: 'hospital',
+        textb: 'list',
+        img: 'img/icons/engsure app icon for PNG-12.png',
+        subicon: true
+    }
     $scope.showDetails = function(SNo) {
         for (var index = 0; index < $scope.listdata.length; index++) {
             if ($scope.listdata[index].SNo == SNo) {
@@ -442,7 +473,12 @@ angular.module('starter.controllers', [])
 })
 
 .controller('benefitsCtrl', function($cordovaSms, $scope, $state, $ionicPopup, dataService, benefitsService) {
-
+        $scope.header = {
+            texta: 'insurance',
+            textb: 'category',
+            img: 'img/icons/engsure app icon for PNG-16.png',
+            subicon: true
+        }
         $scope.listData = ["Category A", "Category B", "Category C"];
 
         $scope.selectGrade = function(index) {
@@ -452,7 +488,12 @@ angular.module('starter.controllers', [])
 
     })
     .controller('benefitsTopListCtrl', function($location, $cordovaSms, $scope, $state, $ionicPopup, dataService, benefitsService) {
-
+        $scope.header = {
+            texta: 'insurance',
+            textb: 'category',
+            img: 'img/icons/engsure app icon for PNG-16.png',
+            subicon: true
+        }
         $scope.listDataOptional = [];
         $scope.listDataOptional = dataService.getBenefitsTopLayer("optional");
 
@@ -470,6 +511,12 @@ angular.module('starter.controllers', [])
     .controller('benefitsSubListCtrl', function($cordovaSms, $scope, $state, $ionicPopup, dataService, benefitsService) {
         console.log("Reached here");
         console.log($state);
+        $scope.header = {
+            texta: 'insurance',
+            textb: 'amount',
+            img: 'img/icons/engsure app icon for PNG-15.png',
+            subicon: true
+        }
         $scope.listData = [];
         var tempList = dataService.getBenefitsSubList(benefitsService.getTitle());
         console.log(tempList);
@@ -509,7 +556,12 @@ angular.module('starter.controllers', [])
 //   });
 // })
 .controller('ContactCtrl', function($cordovaSms, $scope, $state, $ionicPopup) {
-
+    $scope.header = {
+        texta: 'emergency',
+        textb: 'contacts',
+        img: 'img/icons/engsure app icon for PNG-10.png',
+        subicon: true
+    }
     $scope.listdata = [];
     $scope.listdata.push({ "name": "Medical Hotline South (Dr. Salman) 1", "number": "03002018246" });
     $scope.listdata.push({ "name": "Medical Hotline South (Dr. Salman) 2", "number": "0340004489" });

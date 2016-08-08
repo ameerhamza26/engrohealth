@@ -1,27 +1,28 @@
 <ion-view view-title="Home">
-    <ion-content id="back1">
-        <img style="width: 200px" src="engro-foods-logo.png">
+    <header-bar texta="header.texta" textb="header.textb" img="header.img"></header-bar>
+    <ion-content id="back1" class="has-header">
+        <!--         <img style="width: 200px" src="engro-foods-logo.png">
         <img style="float:right; width: 90px" src="engro-life-logo.gif">
-        <!--<div class="bar bar-balanced">
+        <div class="bar bar-balanced">
             <h3 class="title" id="hg"></h3>
-        </div>-->
+        </div>
         <div class="bar bar-balanced">
             <h3 class="title">Engsure</h3>
-        </div>
+        </div> -->
         <div style="margin-top: 60px; margin-right: 25px;margin-left: 25px; padding: 10px 0px 10px 0px; font-size: 16px; border-bottom-style: solid; border-bottom-color: rgba(0,0,0,0.4); border-bottom-width: thin;">
             Register Some Of Your Information First!
         </div>
         <div style="margin-top: 20px; margin-left: 25px; margin-right: 25px;">
-            <input type="text" placeholder="Enter your Name!" style="border-color: black;border-width: thin;border-style: solid; padding-left: 10px; color: black;" ng-model="user.name">
+            <input type="text" placeholder="Enter your Name!" style="border-color: black;border-width: thin;border-style: solid; padding-left: 10px; color: black;     width: 100%;" ng-model="user.name">
         </div>
         <div style="margin-top: 20px; margin-left: 25px; margin-right: 25px;">
-            <input type="text" placeholder="Enter your PNo!" style="border-color: black;border-width: thin;border-style: solid; padding-left: 10px;    color: black;" ng-model="user.po_no">
+            <input type="text" placeholder="Enter your PNo!" style="border-color: black;border-width: thin;border-style: solid; padding-left: 10px;    color: black;    width: 100%;" ng-model="user.po_no">
         </div>
         <div style="margin-top: 20px; margin-left: 25px; margin-right: 25px;">
-            <input type="text" placeholder="Enter your default Emergency Message!" style="border-color: black;border-width: thin;border-style: solid; padding-left: 10px;     color: black;" ng-model="user.message">
+            <input type="text" placeholder="Enter your default Emergency Message!" style="border-color: black;border-width: thin;border-style: solid; padding-left: 10px;     color: black;    width: 100%;" ng-model="user.message">
         </div>
-        <div ng-click="submit()" style="background-color: #33cd5f; color: white; height: 40px ; margin-top:20px; margin-left: 25px; margin-right: 25px;padding-top: 8px; padding-left: 35%;" >
-        	<p style="margin-left: auto; margin-right:auto;">Submit</p>
+        <div ng-click="submit()" style="color: white; height: 40px ; margin-top:20px; margin-left: 25px; margin-right: 25px;padding-top: 8px; padding-left: 35%;background-color:rgba(233,70,40,1); border-color: rgba(233,70,40,1);">
+            <p style="margin-left: auto; margin-right:auto;">Submit</p>
         </div>
     </ion-content>
 </ion-view>

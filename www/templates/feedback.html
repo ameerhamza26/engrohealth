@@ -1,10 +1,5 @@
 <ion-view view-title="Feedback">
-    <div class="bar bar-header bar-balanced">
-        <div class="buttons">
-            <button class="button button-clear ion-ios-arrow-back" ng-click="$ionicGoBack()"></button>
-        </div>
-        <h1 class="title">Feedback</h1>
-    </div>
+    <header-bar texta="header.texta" textb="header.textb" img="header.img" subicon="header.subicon"></header-bar>
     <ion-content id="Feedback" class="has-header" padding="true">
         <div>
             <label class="item item-input">
@@ -13,12 +8,7 @@
             <label class="item item-input">
                 <textarea type="text" rows="5" ng-model="emailText[0].body" placeholder="Enter your feedback"></textarea>
             </label>
-            
-            <button class="button button-block button-balanced" ng-click="sendEmail()">Send Email</button>
+            <button class="button button-block button-balanced" ng-click="sendEmail()" style="background-color:rgba(233,70,40,1); border-color: rgba(233,70,40,1);">Send Email</button>
         </div>
-
-
-
-
     </ion-content>
 </ion-view>
