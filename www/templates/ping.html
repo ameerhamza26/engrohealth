@@ -14,11 +14,12 @@
             <label class="item item-input">
                 <textarea type="text" ng-model="listdata[0].msg" placeholder="Your Emergency Message"></textarea>
             </label>
-            <div style="margin-top:10px;">
-                Your SMS will be sent to:
+            <div class="item item-divider" style="margin-top:10px;">
+                Select names to send SMS
             </div>
-            <ion-item ng-repeat="item in contacts">
-                {{item.name}}
+            <ion-item ng-repeat="item in contacts" class="item-text-wrap">
+                <ion-checkbox ng-model="item.enabled">{{item.name}}</ion-checkbox>
+                <div class="badge badge-assertive" style="right: 0px; position: relative;margin-bottom: 10px;"><p style="color: white; margin-left: auto; margin-right: auto;">{{item.location}}<span ng-if="item.team">({{item.team}})</span></p></div>
             </ion-item>
             <button class="button button-block button-balanced" ng-click="sendSMS()" style="background-color:rgba(233,70,40,1); border-color: rgba(233,70,40,1);">Send SMS</button>
         </div>
