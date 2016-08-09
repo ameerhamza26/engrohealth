@@ -69,7 +69,7 @@ angular.module('starter.controllers', [])
                 $ionicLoading.hide();
             }
 
-        }, 2000)
+        }, 1000)
 
         $scope.status = "true";
         var count;
