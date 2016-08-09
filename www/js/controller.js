@@ -262,7 +262,7 @@ angular.module('starter.controllers', [])
         $scope.listdata[0] = {
             name: $scope.user.name,
             pno: $scope.user.po_no,
-            msg: $scope.user.message
+            location: $scope.user.message
         }
         
         $scope.contacts = [];
