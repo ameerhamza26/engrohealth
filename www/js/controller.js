@@ -157,7 +157,9 @@ angular.module('starter.controllers', [])
             console.log("External Directory:" + cordova.file.externalDataDirectory);
             $cordovaFile.copyFile("file:///android_asset/www/", "claimForm.pdf", "file:///storage/emulated/0/", "In-Patient Claim Form.pdf")
                 .then(function(success) {
-
+                    // $ionicPopup.alert({
+                    //     title: 'Your form has been downloaded and can be seen in local notification'
+                    // });
                     count = 0;
 
                     cordova.plugins.notification.local.schedule({
@@ -166,7 +168,7 @@ angular.module('starter.controllers', [])
                         title: "File Saved",
                         autoCancel: true,
                         sound: null,
-                        icon: "img/icons/logo.png",
+                        smallIcon: "notification",
                     })
 
 
@@ -225,7 +227,7 @@ angular.module('starter.controllers', [])
 
 
     })
-    .controller('feedbackCtrl', function($scope) {
+    .controller('feedbackCtrl', function($scope, $ionicPopup, $rootScope) {
         $scope.header = {
             texta: 'feedback',
             textb: '',
@@ -234,19 +236,62 @@ angular.module('starter.controllers', [])
         }
         $scope.emailText = [];
         $scope.sendEmail = function() {
-            if (window.plugins && window.plugins.emailComposer) {
-                window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
-                        alert(result);
-                    },
-                    "Feedback From " + $scope.emailText[0].name + " For Engro Health Insurance(Phase I) ", // Subject
-                    $scope.emailText[0].body, // Body
-                    ["wkhawar@engrofoods.com", "mtalhajamil93@gmail.com", "ameerhamza810@gmail.com", "s.wasiq.muhammad@gmail.com"], // To
-                    null, // CC
-                    null, // BCC
-                    false, // isHTML
-                    null, // Attachments
-                    null); // Attachment Data
+            // cordova.plugins.email.isAvailable(
+            //     function(isAvailable) {
+            //         console.log(isAvailable)
+            //         //alert('Service is not available') unless isAvailable;
+            //     }, function() {
+            //         console.log("is ab")
+            //     }
+            // );
+
+            // cordova.plugins.email.open({
+            //     to :   ["mtalhajamil93@gmail.com", "ameerhamza810@gmail.com", "s.wasiq.muhammad@gmail.com"], // To
+            //     subject:  "Feedback From " + $scope.emailText[0].name + " For Engro Health Insurance(Phase I) ", // Subject
+            //     body:  $scope.emailText[0].body, // Body
+
+            // }, function(res){
+            //         console.log(res)
+            // }, $scope)
+            if ($scope.emailText[0] == undefined) {
+                $ionicPopup.alert({
+                    title: 'Please Enter your Name/Feedback'
+                });
+
+
+
+            } else if ($scope.emailText[0].name == null || $scope.emailText[0].name == "") {
+
+                $ionicPopup.alert({
+                    title: 'Please Enter your Name'
+                });
+            } else if ($scope.emailText[0].body == null || $scope.emailText[0].body == "") {
+
+                $ionicPopup.alert({
+                    title: 'Please Enter your feedback'
+                });
+            } else {
+                if (window.plugins && window.plugins.emailComposer) {
+                    console.log("in if")
+                    $ionicPopup.alert({
+                        title: 'Thankyou for your feedback!'
+                    });
+                    window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
+                            alert(result);
+                        },
+                        "Feedback From " + $scope.emailText[0].name + " For Engro Health Insurance(Phase I) ", // Subject
+                        $scope.emailText[0].body, // Body
+                        ["wkhawar@engrofoods.com", "mtalhajamil93@gmail.com", "ameerhamza810@gmail.com", "s.wasiq.muhammad@gmail.com"], // To
+                        null, // CC
+                        null, // BCC
+                        false, // isHTML
+                        null, // Attachments
+                        null); // Attachment Data
+                    $scope.emailText[0].name = "";
+                    $scope.emailText[0].body = "";
+                }
             }
+
         }
     })
     .controller('PingCtrl', function($cordovaSms, $scope, $ionicPopup, localStorageService) {
@@ -264,28 +309,28 @@ angular.module('starter.controllers', [])
             pno: $scope.user.po_no,
             location: $scope.user.message
         }
-        
+
         $scope.contacts = [];
-        $scope.contacts.push({ "name": "Anis", "location": "Adamjee Team", "number": "03400004389", "team":"", "enabled":false});
-        $scope.contacts.push({ "name": "Mohsin", "location": "Adamjee Team", "number": "03028228254", "team":"", "enabled":false});
-        $scope.contacts.push({ "name": "Zulfiqar Ali", "location": "Sahiwal - Plant","number": "03028690677", "team":"Engro HR", "enabled":false});
-        $scope.contacts.push({ "name": "Shumaila Sheikh", "location": "Sukkur - Plant","number": "080000242", "team":"Engro HR", "enabled":false});
-        $scope.contacts.push({ "name": "Saqib Riaz", "location": "Ice Cream","number": "03005193279", "team":"Engro HR", "enabled":false});
-        $scope.contacts.push({ "name": "Syed Sajjad Ali", "location": "Marketing","number": "03002611012", "team":"Engro HR", "enabled":false});
-        $scope.contacts.push({ "name": "Muhammad Atif - Nara", "location": "Nara","number": "03413764484", "team":"Engro HR", "enabled":false});
-        $scope.contacts.push({ "name": "Vanessa", "location": "Dairy Sales","number": "03000200627", "team":"Engro HR", "enabled":false});
-        $scope.contacts.push({ "name": "Shakeel", "location": "Dairy Sales","number": "03074920297", "team":"Engro HR", "enabled":false});
-        $scope.contacts.push({ "name": "Naeem Ahmed", "location": "MPAS Head Office","number": "03077772316", "team":"Engro HR", "enabled":false});
-         $scope.contacts.push({ "name": "Ali Mubeen", "location": "MPAS - Skr","number": "0302-8693282", "team":"Engro HR", "enabled":false});
-         $scope.contacts.push({ "name": "Ameerzada Mumtaz", "location": "MPAS - Jhang","number": "03028690673", "team":"Engro HR", "enabled":false});
-         $scope.contacts.push({ "name": "Hassan Nazir", "location": "MPAS - Swl Zone 3","number": "03028266312", "team":"Engro HR", "enabled":false});
-         $scope.contacts.push({ "name": "Muhammad Asif", "location": "MPAS - Bhawalpur","number": "03028245389", "team":"Engro HR", "enabled":false});
-        $scope.contacts.push({ "name": "Muhammad Ahsan", "location": "C & B (Head Office)","number": "03000200676", "team": "", "enabled":false});
-        $scope.contacts.push({ "name": "Waleed Khawar", "location": "C & B (Head Office)","number": "03028285155", "team":"", "enabled":false});
-        
-           // $scope.contacts.push({ "name": "Ameer hamza", "location": "MPAS - Bhawalpur","number": "03462651725", "team":"Engro HR", "enabled":false});
-           // $scope.contacts.push({ "name": "Talha Jamil", "location": "C & B (Head Office)","number": "03126995968", "team":"", "enabled":false});
-           // $scope.contacts.push({ "name": "Waleed Khawar", "location": "C & B (Head Office)","number": "03028285155", "team":"", "enabled":false});
+        $scope.contacts.push({ "name": "Anis", "location": "Adamjee Team", "number": "03400004389", "team": "", "enabled": false });
+        $scope.contacts.push({ "name": "Mohsin", "location": "Adamjee Team", "number": "03028228254", "team": "", "enabled": false });
+        $scope.contacts.push({ "name": "Zulfiqar Ali", "location": "Sahiwal - Plant", "number": "03028690677", "team": "Engro HR", "enabled": false });
+        $scope.contacts.push({ "name": "Shumaila Sheikh", "location": "Sukkur - Plant", "number": "080000242", "team": "Engro HR", "enabled": false });
+        $scope.contacts.push({ "name": "Saqib Riaz", "location": "Ice Cream", "number": "03005193279", "team": "Engro HR", "enabled": false });
+        $scope.contacts.push({ "name": "Syed Sajjad Ali", "location": "Marketing", "number": "03002611012", "team": "Engro HR", "enabled": false });
+        $scope.contacts.push({ "name": "Muhammad Atif - Nara", "location": "Nara", "number": "03413764484", "team": "Engro HR", "enabled": false });
+        $scope.contacts.push({ "name": "Vanessa", "location": "Dairy Sales", "number": "03000200627", "team": "Engro HR", "enabled": false });
+        $scope.contacts.push({ "name": "Shakeel", "location": "Dairy Sales", "number": "03074920297", "team": "Engro HR", "enabled": false });
+        $scope.contacts.push({ "name": "Naeem Ahmed", "location": "MPAS Head Office", "number": "03077772316", "team": "Engro HR", "enabled": false });
+        $scope.contacts.push({ "name": "Ali Mubeen", "location": "MPAS - Skr", "number": "0302-8693282", "team": "Engro HR", "enabled": false });
+        $scope.contacts.push({ "name": "Ameerzada Mumtaz", "location": "MPAS - Jhang", "number": "03028690673", "team": "Engro HR", "enabled": false });
+        $scope.contacts.push({ "name": "Hassan Nazir", "location": "MPAS - Swl Zone 3", "number": "03028266312", "team": "Engro HR", "enabled": false });
+        $scope.contacts.push({ "name": "Muhammad Asif", "location": "MPAS - Bhawalpur", "number": "03028245389", "team": "Engro HR", "enabled": false });
+        $scope.contacts.push({ "name": "Muhammad Ahsan", "location": "C & B (Head Office)", "number": "03000200676", "team": "", "enabled": false });
+        $scope.contacts.push({ "name": "Waleed Khawar", "location": "C & B (Head Office)", "number": "03028285155", "team": "", "enabled": false });
+
+        // $scope.contacts.push({ "name": "Ameer hamza", "location": "MPAS - Bhawalpur","number": "03462651725", "team":"Engro HR", "enabled":false});
+        // $scope.contacts.push({ "name": "Talha Jamil", "location": "C & B (Head Office)","number": "03126995968", "team":"", "enabled":false});
+        // $scope.contacts.push({ "name": "Waleed Khawar", "location": "C & B (Head Office)","number": "03028285155", "team":"", "enabled":false});
 
         $scope.sendSMS = function() {
             $ionicPopup.show({
@@ -302,43 +347,43 @@ angular.module('starter.controllers', [])
                 ]
             });
         }
-        
-        
+
+
 
         function send() {
             var failed = 0;
             var sent = 0;
             var SMS = "Dear Insurance Members:\n\nEmergency MSG:" + $scope.listdata[0].msg + "\n\nName:" + $scope.listdata[0].name + "\n\nPNo:" + $scope.listdata[0].pno + "\n\nLocation:" + $scope.listdata[0].location;
-            
+
             var enabled = 0;
-            
-            for(var index = 0; index < $scope.contacts.length; index++){
-                if($scope.contacts[index].enabled == true){
+
+            for (var index = 0; index < $scope.contacts.length; index++) {
+                if ($scope.contacts[index].enabled == true) {
                     enabled++;
                 }
             }
-            
+
             for (var index = 0; index < $scope.contacts.length; index++) {
-                if($scope.contacts[index].enabled == true){
-                $cordovaSms
-                    .send($scope.contacts[index].number, SMS, 'options')
-                    .then(function() {
-                        sent++
+                if ($scope.contacts[index].enabled == true) {
+                    $cordovaSms
+                        .send($scope.contacts[index].number, SMS, 'options')
+                        .then(function() {
+                            sent++
 
-                        if (sent == enabled) {
-                            $ionicPopup.alert({
-                                title: 'SMS sent'
-                            });
-                        }
+                            if (sent == enabled) {
+                                $ionicPopup.alert({
+                                    title: 'SMS sent'
+                                });
+                            }
 
-                    }, function(error) {
-                        failed++;
-                        if (failed == enabled) {
-                            $ionicPopup.alert({
-                                title: 'SMS Sending Failed. Make sure you have sufficient balance'
-                            });
-                        }
-                    });
+                        }, function(error) {
+                            failed++;
+                            if (failed == enabled) {
+                                $ionicPopup.alert({
+                                    title: 'SMS Sending Failed. Make sure you have sufficient balance'
+                                });
+                            }
+                        });
                 }
             }
         }
