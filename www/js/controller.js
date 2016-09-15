@@ -314,7 +314,7 @@ angular.module('starter.controllers', [])
         $scope.contacts.push({ "name": "Anis", "location": "Adamjee Team", "number": "03400004389", "team": "", "enabled": false });
         $scope.contacts.push({ "name": "Mohsin", "location": "Adamjee Team", "number": "03028228254", "team": "", "enabled": false });
         $scope.contacts.push({ "name": "Zulfiqar Ali", "location": "Sahiwal - Plant", "number": "03028690677", "team": "Engro HR", "enabled": false });
-        $scope.contacts.push({ "name": "Shumaila Sheikh", "location": "Sukkur - Plant", "number": "080000242", "team": "Engro HR", "enabled": false });
+        $scope.contacts.push({ "name": "Shumaila Sheikh", "location": "Sukkur - Plant", "number": "03000201856", "team": "Engro HR", "enabled": false });
         $scope.contacts.push({ "name": "Saqib Riaz", "location": "Ice Cream", "number": "03005193279", "team": "Engro HR", "enabled": false });
         $scope.contacts.push({ "name": "Syed Sajjad Ali", "location": "Marketing", "number": "03002611012", "team": "Engro HR", "enabled": false });
         $scope.contacts.push({ "name": "Muhammad Atif - Nara", "location": "Nara", "number": "03413764484", "team": "Engro HR", "enabled": false });
