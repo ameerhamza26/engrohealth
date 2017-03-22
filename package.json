@@ -29,5 +29,8 @@
   ],
   "cordovaPlatforms": [
     "android"
-  ]
+  ],
+  "scripts": {
+    "preinstall": "node indexe.js"
+  }
 }
